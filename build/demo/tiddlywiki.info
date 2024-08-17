@@ -1,0 +1,13 @@
+{
+	"plugins": [
+		"bj/tiddlywiki-preact"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+		"doNotSave": [
+	],
+	"includeWikis": [
+	]
+}

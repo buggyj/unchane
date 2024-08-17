@@ -1,0 +1,11 @@
+{
+	"tiddlers": [
+		{
+			"file": "standalone.js",
+			"fields": {
+				"type": "plain/text",
+				"title": "$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs"
+			}
+		}
+	]
+}

@@ -1,0 +1,11 @@
+{
+	"title": "$:/plugins/bj/tiddywiki-preact",
+    "name":"tiddywiki-preact",
+	"description": "interface to preact with signals and htm",
+	"author": "Jeffrey Wilkinson (BJ)",
+	"version": "0.1",
+	"list": "readme license",
+	"core-version": ">=5.3.0",
+	"source": "https://github.com/buggyj/tiddywiki-preact",
+	"plugin-type": "plugin"
+}
