@@ -44,7 +44,7 @@ const createModuleLoader = (getModule) => {
 				delete globalThis[`__privateLoadModule${name}`];
 				moduleCache.set(id, module);
 				return module;
-			}catch(e) {return moduleCache.get(id);}
+			}catch(e) {console.log("failed at import ",id,e);return moduleCache.get(id);}
         
         } catch (error) {
             console.error(`Error loading module ${id}: ${error}`);
@@ -68,4 +68,7 @@ const createModuleLoader = (getModule) => {
     };
 };
 
-exports.bjModuleLoader = createModuleLoader((module)=>$tw.wiki.getTiddler(module).fields.text);
+exports.bjModuleLoader = createModuleLoader((module)=>{
+	//if ($tw.wiki.tiddlerExists(module)) throw new Error('unexpected mjs file!');
+	return $tw.wiki.getTiddler(module).fields.text;
+});

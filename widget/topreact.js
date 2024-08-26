@@ -75,7 +75,7 @@ module-type: widget
                 });
             });
             
-            render(html`<${start} state=${this.state} ...${this.params}/ >`,this.domNode);
+            render(html`<${start} state=${this.state} __toTiddlers=${this.toTiddlers} ...${this.params}/ >`,this.domNode);
             console.log(`Cache size: ${bjModuleLoader.numModules()}`);
             } catch (error) {
                 console.error('Error in main execution:', error);
