@@ -40,11 +40,12 @@ const createModuleLoader = (getModule) => {
 
             // globalize loader so that it can be compiled in with the modules to override their import()s
             globalThis[`__privateLoadModule${name}`] = loadModule;
-            const module = await import(codeAsDataURL);//compile into a module
-            delete globalThis[`__privateLoadModule${name}`];
-
-            moduleCache.set(id, module);
-            return module;
+            try{const module = await import(codeAsDataURL);//compile into a module
+				delete globalThis[`__privateLoadModule${name}`];
+				moduleCache.set(id, module);
+				return module;
+			}catch(e) {return moduleCache.get(id);}
+        
         } catch (error) {
             console.error(`Error loading module ${id}: ${error}`);
             throw error;
