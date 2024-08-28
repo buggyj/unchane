@@ -1,0 +1,20 @@
+{
+	"tiddlers": [
+		{
+			"file": "mimport.js",
+			"fields": {
+				"type": "application/javascript",
+				"module-type": "library",
+				"title": "$:/plugins/bj/tiddlywiki-preact/mimport.js"
+			}
+		},
+		{
+			"file": "mkplugin.js",
+			"fields": {
+				"type": "application/javascript",
+				"module-type": "utils",
+				"title": "$:/bj/modules/utils/mkplugin.js"
+			}
+		}
+	]
+}

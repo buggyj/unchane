@@ -69,6 +69,6 @@ const createModuleLoader = (getModule) => {
 };
 
 exports.bjModuleLoader = createModuleLoader((module)=>{
-	if ($tw.wiki.tiddlerExists(module)) throw new Error('unexpected mjs file!');
+	//if ($tw.wiki.tiddlerExists(module)) throw new Error('unexpected mjs file!');
 	return $tw.wiki.getTiddler(module).fields.text;
 });
