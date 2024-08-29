@@ -54,8 +54,9 @@ module-type: widget
             const {html, render, signal, effect} =  await bjModuleLoader.loadModule ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
 
 
-                
+	
             // Initialize an object with signals
+			try {
             this.state = {};
             this.tiddlers.forEach(tid => {
             var valin = self.getTypedTxtRef(tid);    
@@ -74,7 +75,13 @@ module-type: widget
                 }
                 });
             });
-            
+       		}catch (e){console.log(e)
+
+					   this.makeChildWidgets(this.getErrorMessage());
+		this.renderChildren(this.domNode,null);
+
+			return;	
+		}     
             render(html`<${start} __state=${this.state} __toTiddlers=${this.toTiddlers} ...${this.params}/ >`,this.domNode);
             console.log(`Cache size: ${bjModuleLoader.numModules()}`);
             } catch (error) {
@@ -117,7 +124,23 @@ module-type: widget
           });
           this.tiddlers =tds;
     }
-    /*
+
+
+	preactWidget.prototype.getErrorMessage = function() {
+		var parser,
+			errorMessage = this.getAttribute("errorMessage","");
+
+		if (errorMessage === "") {console.log("error without a name")
+			return [];
+		}
+		parser = this.wiki.parseText("text/vnd.tiddlywiki",errorMessage,{parseAsInline: true});
+		if(parser) {
+			return parser.tree;
+		} else {
+			return [];
+		}
+	};
+	/*
     Compute the internal state of the widget
     */
     preactWidget.prototype.execute = function() {
@@ -157,8 +180,13 @@ module-type: widget
     preactWidget.prototype.updatedTids = function( changedTiddlers) {
         const arr1=this.tiddlers||[];
         const updates = arr1.filter(item => changedTiddlers[item.split("!!")[0]]);
+		try {
         this.updateSignals(updates);
         return updates.length;
+		}catch (e){console.log(e)
+			this.refreshSelf();
+			return 1;	
+		}
     }
     preactWidget.prototype.updateSignals= function(updates){
         self=this;
