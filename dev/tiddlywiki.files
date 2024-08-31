@@ -10,7 +10,7 @@
 		},		{
 			"file": "mkplugin.tid",
 			"fields": {
-				"title": "$:/plugins/bj/tiddywiki-preact/dev/make"
+				"title": "$:/plugins/bj/tiddlywiki-preact/dev/make"
 			}
 		},
 		{

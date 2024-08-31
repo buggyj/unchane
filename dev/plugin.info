@@ -1,5 +1,5 @@
 {
-	"title": "$:/plugins/bj/tiddywiki-preact/dev",
+	"title": "$:/plugins/bj/tiddlywiki-preact/dev",
     "name":"tiddywiki-preact-dev",
 	"description": "interface to preact with signals and htm",
 	"author": "Jeffrey Wilkinson (BJ)",

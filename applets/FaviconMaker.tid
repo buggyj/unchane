@@ -1,6 +1,7 @@
 parent-plugin: $:/plugins/bj/tiddywiki-preact
 plugin-type: plugin
 tags: 
+list: readme
 title: $:/plugins/bj/FaviconMaker
 type: application/json
 version: 0.0.4
@@ -25,10 +26,10 @@ version: 0.0.4
         },
         "$:/bj/faviconMaker/colorpicker.mjs": {
             "created": "20240822091848804",
-            "text": "const {html, render, signal, effect, useSignal} = await import (\"$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs\");\n\nconst { ColorPicker } = await import ('$:/bj/faviconMaker/preactjs/colorpicker.mjs');\n \nfunction colorPickerApp({__state}) {\n\treturn html`\n    <div>\n      <h1>Color Picker</h1>\n      <${ColorPicker} initialColor=${__state['hue'].value} update=${nextValue => __state['hue'].value = nextValue}/>\n \n    </div>\n  `;\n}\n\nexport  {colorPickerApp as start};\n",
+            "text": "const {html, render, signal, effect, useSignal} = await import (\"$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs\");\n\nconst { ColorPicker } = await import ('$:/bj/faviconMaker/preactjs/colorpicker.mjs');\n \nfunction colorPickerApp({__state}) {\n\treturn html`\n    <div>\n      <h1>Color Picker</h1>\n      <${ColorPicker} initialColor=${__state['colorNum'].value} update=${nextValue => __state['colorNum'].value = nextValue}/>\n \n    </div>\n  `;\n}\n\nexport  {colorPickerApp as start};\n",
             "tags": "",
             "title": "$:/bj/faviconMaker/colorpicker.mjs",
-            "modified": "20240827095301537",
+            "modified": "20240831142804074",
             "type": "application/javascript"
         },
         "$:/bj/faviconMaker/favicon.mjs": {
@@ -65,26 +66,33 @@ version: 0.0.4
         },
         "$:/bj/faviconMaker/topng.mjs": {
             "created": "20240826103714829",
-            "text": "const imports = await import (\"$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs\");\n\nconst {html, render, signal, effect,useComputed, useSignal,useRef,useEffect } = imports; \n\nconst {hexToRgb,rgbArrayToPNG} = await import (\"$:/bj/faviconMaker/preactjs/colorutils.mjs\");\nconst { getTextReference,setTextReference } = await import ('$:/plugins/bj/tiddlywiki-preact/store.js');\n \nfunction  doToFav(table,sourceTid,toTid){\n\tlet colors=[];\n\tsetTextReference(`${toTid}!!type`,\"image/x-icon\")\n\tfor (var i = 0;i<8;i++){colors[i]=getTextReference(`${sourceTid}!!${i}`)}\n\tsetTextReference(toTid,rgbArrayToPNG(table.map(row => row.map(value => hexToRgb(colors[value])))).split(',')[1]);\n\n}\n\nfunction doPng(table,TidName){\n\tlet colors=[];\n\t\n\tfor (var i = 0;i<8;i++){colors[i]=getTextReference(`${TidName}!!${i}`)}\n\twriteClipboardText(rgbArrayToPNG(table.map(row => row.map(value => hexToRgb(colors[value])))));\n\n}\nasync function writeClipboardText(text) {\n  try {\n    await navigator.clipboard.writeText(text);\n  } catch (error) {\n    console.error(error.message);\n  }\n}\nfunction toPngApp({__state,__toTiddlers,toTid}) {\n\t\n\treturn  html`\n\t  <button onClick=${() => (doPng(__state[\"table\"].value,__toTiddlers['table']))}>\n\t\tcopy PNG to clipboard\n\t  </button>\n\t\t<button onClick=${() => (doToFav(__state[\"table\"].value,__toTiddlers['table'],toTid))}>\n\t\tcopy favicon to ${toTid}\n\t  </button>`\n}\n\nexport  {toPngApp as start};\n",
+            "text": "const imports = await import (\"$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs\");\n\nconst {html, render, signal, effect,useComputed, useSignal,useRef,useEffect } = imports; \n\nconst {hexToRgb,rgbArrayToPNG} = await import (\"$:/bj/faviconMaker/preactjs/colorutils.mjs\");\nconst {getTextReference,setTextReference,getJsonTxtRef} = await import ('$:/plugins/bj/tiddlywiki-preact/store.js');\n \nfunction  doToFav(sourceTid,toTid){\n\tlet colors=[];\n\tconst table=getJsonTxtRef(sourceTid)\n\tsetTextReference(`${toTid}!!type`,\"image/x-icon\")\n\tfor (var i = 0;i<8;i++){colors[i]=getTextReference(`${sourceTid}!!${i}`)}\n\tsetTextReference(toTid,rgbArrayToPNG(table.map(row => row.map(value => hexToRgb(colors[value])))).split(',')[1]);\n\n}\n\nfunction doPng(TidName){\n\tlet colors=[];\n\tconst table=getJsonTxtRef(TidName)\n\tfor (var i = 0;i<8;i++){colors[i]=getTextReference(`${TidName}!!${i}`)}\n\twriteClipboardText(rgbArrayToPNG(table.map(row => row.map(value => hexToRgb(colors[value])))));\n\n}\nasync function writeClipboardText(text) {\n  try {\n    await navigator.clipboard.writeText(text);\n  } catch (error) {\n    console.error(error.message);\n  }\n}\nfunction toPngApp({source,toTid}) {\n\t\n\treturn  html`\n\t  <button onClick=${() => (doPng(source))}>\n\t\tcopy PNG to clipboard\n\t  </button>\n\t\t<button onClick=${() => (doToFav(source,toTid))}>\n\t\tcopy favicon to ${toTid}\n\t  </button>`\n}\n\nexport  {toPngApp as start};\n",
             "tags": "",
             "title": "$:/bj/faviconMaker/topng.mjs",
-            "modified": "20240830164415934",
+            "modified": "20240831142046119",
             "type": "application/javascript"
         },
         "$:/bj/faviconMaker/faviconMaker": {
             "created": "20240825173533698",
-            "text": "\\import $:/bj/faviconMaker/mkfaviconWidgets\n\n\\define NewFav()\n<$action-createtiddler $basetitle=\"icon\" $template=\"$:/bj/faviconMaker/blankicon\" tags=\"protoFavicon\"/>\n\\end\n\nselect favicon<$select tiddler=<<qualify '$:/temp/select-icon'>> default='icon'>\n<$list filter='[tag[protoFavicon]]'>\n   <option value=<<currentTiddler>>><$view field='title'/></option>\n</$list>\n</$select>\n<$button actions=<<NewFav>>>\n   new favicon\n</$button>\n\n<$vars currentTiddler={{{[<qualify \"$:/temp/select-icon\">get[text]else[icon]]}}}>\n<$list filter='[all[current]get[title]]' variable=n emptyMessage=\"\">\n\n<$mkfavicon.topng tid=<<currentTiddler>> toTid=\"$:/favicon.ico\"/>\n\n<$vars xcolor={{{[<qualify \"$:/temp/color\">get[text]else[0]]}}} space=\"charcode[160]\">\n<table><tr>\n\t<table><tr>\n\t<$list filter=\"0 1 2 3 4 5 6 7\" variable=n>\n\t<$vars color={{{[<currentTiddler>get<n>]}}}>\n\t\t<td style=`padding: 0;`>\n\t\t<$button style=`width:100%;height:100%;background:$(color)$;`set=<<qualify \"$:/temp/color\">> setTo=<<n>>>\n\t\t\t{{{[<n>compare:number:eq<xcolor>then[⚫]]}}}&nbsp;\n\t\t</$button>\n\t\t</td>\n\t</$vars>\n\t</$list>\n\t</tr></table>\n\t<tr></tr>\n\t<$mkfavicon.colorsel tid=<<currentTiddler>> num=<<xcolor>>/>\n</tr></table>\n<$mkfavicon.edit tid=<<currentTiddler>> colorsel=<<xcolor>>/></$vars></$list>",
+            "text": "\\import $:/bj/faviconMaker/mkfaviconWidgets\n\n\\define NewFav()\n<$action-createtiddler $basetitle=\"icon\" $template=\"$:/bj/faviconMaker/blankicon\" tags=\"protoFavicon\"/>\n\\end\n\nselect favicon<$select tiddler=<<qualify '$:/temp/select-icon'>> default='icon'>\n<$list filter='[tag[protoFavicon]]'>\n   <option value=<<currentTiddler>>><$view field='title'/></option>\n</$list>\n</$select>\n<$button actions=<<NewFav>>>\n   new favicon\n</$button> &nbsp;[[$:/favicon.ico]]\n\n<$vars currentTiddler={{{[<qualify \"$:/temp/select-icon\">get[text]else[icon]]}}}>\n<$list filter='[all[current]get[title]]' variable=n emptyMessage=\"\">\n\n<$mkfavicon.topng tid=<<currentTiddler>> toTid=\"$:/favicon.ico\"/>\n\n<$vars xcolor={{{[<qualify \"$:/temp/color\">get[text]else[0]]}}} space=\"charcode[160]\">\n<table><tr>\n\t<table><tr>\n\t<$list filter=\"0 1 2 3 4 5 6 7\" variable=n>\n\t<$vars color={{{[<currentTiddler>get<n>]}}}>\n\t\t<td style=`padding: 0;`>\n\t\t<$button style=`width:100%;height:100%;background:$(color)$;`set=<<qualify \"$:/temp/color\">> setTo=<<n>>>\n\t\t\t{{{[<n>compare:number:eq<xcolor>then[⚫]]}}}&nbsp;\n\t\t</$button>\n\t\t</td>\n\t</$vars>\n\t</$list>\n\t</tr></table>\n\t<tr></tr>\n\t<$mkfavicon.colorsel tid=<<currentTiddler>> num=<<xcolor>>/>\n</tr></table>\n<$mkfavicon.edit tid=<<currentTiddler>> colorsel=<<xcolor>>/></$vars></$list>",
             "tags": "app",
             "title": "$:/bj/faviconMaker/faviconMaker",
-            "modified": "20240830131602543"
+            "modified": "20240831143529965"
         },
         "$:/bj/faviconMaker/mkfaviconWidgets": {
             "created": "20240828095412682",
-            "text": "\\widget $mkfavicon.edit(tid,colorsel:0 )\n<$pwidget $app=\"$:/bj/faviconMaker/favicon.mjs\" $tids=`[[:table|$(tid)$]]` colorsel=<<colorsel>> errorMessage=\"<Error in Edit\"/>\n\\end\n\n\\widget $mkfavicon.colorsel(tid,num:0)\n<$pwidget $app=\"$:/bj/faviconMaker/colorpicker.mjs\" $tids=`[[hue|$(tid)$!!$(num)$]] ` errorMessage=\"Error in colsel\"/>\n\\end\n\n\\widget $mkfavicon.topng(tid, toTid)\n<$pwidget $app=\"$:/bj/faviconMaker/topng.mjs\" $tids=`[[:table|$(tid)$]]` toTid=<<toTid>> errorMessage=\"Error in topng\"/>\n\\end\n",
+            "text": "\\widget $mkfavicon.edit(tid,colorsel:0 )\n<$pwidget $app=\"$:/bj/faviconMaker/favicon.mjs\" $tids=`[[:table|$(tid)$]]` colorsel=<<colorsel>> errorMessage=\"<Error in Edit\"/>\n\\end\n\n\\widget $mkfavicon.colorsel(tid,num:0)\n<$pwidget $app=\"$:/bj/faviconMaker/colorpicker.mjs\" $tids=`[[colorNum|$(tid)$!!$(num)$]] ` errorMessage=\"Error in colsel\"/>\n\\end\n\n\\widget $mkfavicon.topng(tid, toTid)\n<$pwidget $app=\"$:/bj/faviconMaker/topng.mjs\" source=<<tid>> toTid=<<toTid>> errorMessage=\"Error in topng\"/>\n\\end\n",
             "tags": "",
             "title": "$:/bj/faviconMaker/mkfaviconWidgets",
-            "modified": "20240830131518480",
+            "modified": "20240831143042988",
             "code-body": "yes"
+        },
+        "$:/plugins/bj/FaviconMaker/readme": {
+            "created": "20240831145419711",
+            "text": "creates favicon icons with a selection fo 8 customizable colors.",
+            "tags": "",
+            "title": "$:/plugins/bj/FaviconMaker/readme",
+            "modified": "20240831145543196"
         }
     }
 }
