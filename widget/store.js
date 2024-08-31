@@ -16,7 +16,15 @@ function twGetTextReference(ref){
     
     const getTextReference = function(ref){var val= twGetTextReference(ref);return val};
     const setTextReference = function(ref,val){return $tw.wiki.setTextReference.call($tw.wiki,ref,val)};
-    
+
+    const getBoolTxtRef = function(ref){
+        var retval = twGetTextReference(ref);
+		if ((retval==="true") || (retval==="false"))
+			return (retval ==='true');
+		throw new Error("Not bool")
+    };
+    const setBoolTxtRef = function(ref,val){return $tw.wiki.setTextReference.call($tw.wiki,ref,val.toString())};
+
     const getNumTxtRef = function(ref){
         var retval = twGetTextReference(ref)*1;
     if (isNaN(retval)) throw new Error("read NaN")
@@ -28,7 +36,9 @@ function twGetTextReference(ref){
     const setJsonTxtRef = function(ref,val){return $tw.wiki.setTextReference.call($tw.wiki,ref,JSON.stringify(val))};
     
     const setTxtRef= function(typ, tid, val){
-        if (typ ==='#') {
+        if (typ ==='?') {
+            return setBoolTxtRef(tid, val);
+        } else if (typ ==='#') {
             return setNumTxtRef(tid, val);
         } else if (typ ===':') {
             return setJsonTxtRef(tid, val);
@@ -39,7 +49,9 @@ function twGetTextReference(ref){
     
     const getTxtRef = function(typ, tid){ 
         var x;
-        if (typ ==='#') {
+        if (typ ==='?') {
+           x= getBoolTxtRef(tid);
+       } else if (typ ==='#') {
            x= getNumTxtRef(tid);
        } else if (typ ===':') {
            x= getJsonTxtRef(tid);
@@ -53,6 +65,9 @@ function twGetTextReference(ref){
     exports.getTextReference = getTextReference;
     exports.setTextReference = setTextReference;
     
+    exports.getBoolTxtRef = getBoolTxtRef;
+    exports.setBoolTxtRef = setBoolTxtRef;
+
     exports.getNumTxtRef = getNumTxtRef;
     exports.setNumTxtRef = setNumTxtRef;
     

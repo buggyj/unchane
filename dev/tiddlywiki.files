@@ -7,13 +7,18 @@
 				"module-type": "library",
 				"title": "$:/plugins/bj/tiddlywiki-preact/mimport.js"
 			}
+		},		{
+			"file": "mkplugin.tid",
+			"fields": {
+				"title": "$:/plugins/bj/tiddywiki-preact/dev/make"
+			}
 		},
 		{
 			"file": "mkplugin.js",
 			"fields": {
 				"type": "application/javascript",
-				"module-type": "utils",
-				"title": "$:/bj/modules/utils/mkplugin.js"
+				"module-type": "macro",
+				"title": "$:/bj/modules/macro/mkpluginmacro.js"
 			}
 		}
 	]

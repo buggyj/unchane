@@ -62,9 +62,9 @@ const createModuleLoader = (getModule) => {
 
     return {
         loadModule,
-        reset: () => moduleCache.clear(),
-        numModules: () => moduleCache.size,
-        allkeys
+        //reset: () => moduleCache.clear(),
+        //numModules: () => moduleCache.size,
+        //allkeys
     };
 };
 

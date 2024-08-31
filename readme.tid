@@ -1,1 +1,27 @@
+Preact modules are actioned by the pwidget. The parameters of the pwidget will be explained by using an [[example|$:/plugins/bj/tiddlywiki-preact/ASimpleExample]]:
 
+```
+<$pwidget $app="simple.mjs" $tids=`[[comment|commentTid]] [[#pcounter1|cntTid1]] [[#pcounter2|cntTid2]] ` title={{titleTid}}  errorMessage="Error in app"/>
+```
+
+
+The name of the module passed via the $app parameter. The pwidget two way binds between tiddlers and preact varibles through a list passed to the pwidget via $tids. A typical element of the list has the form:
+
+```
+[[preactVarA|tiddlerB]]
+```
+
+Within the Preact these variables are in an array prop called `__state` (an array of preact singnals). This means that when `__state["preactVarA"]` changes `TiddlerB` will also have the same change and visversa. The default type of preact variables is string, this can be change to number by adding a '#' (or to json 
+by adding a ":", or bool with a""?") A tiddler field can be connect by using a text reference eg
+
+```
+[[pvarX|tidY!!fieldZ]]
+```
+
+
+Other non-reactive parameters are added  to the pwidget as normal tiddlywiki widget parameters, and are passed to preact props of the same name eg "title".
+
+
+The `preact modules` are expected to be `es6`, but only using `await import(...)` and their `tiddler title` should end with `.mjs`
+
+Errors with mapping tids to preact variables (non-existante tids for example) will result in the widget not appearing. An error message can be pass to the widgets  'errorMessage' parameter which will be displayed when errors occur.

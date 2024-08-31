@@ -1,0 +1,26 @@
+\define update()
+<$macrocall $name=mkpluginmacro title={{{[<qualify '$:/temp/select-applet'>get[text]]}}} adds={{{[<qualify '$:/temp/select-applet-adds'>get[text]]}}} dels={{{[<qualify '$:/temp/select-applet-dels'>get[text]]}}}/>
+\end
+
+\define new()
+<$action-createtiddler $basetitle={{{[<qualify '$:/temp/select-applet-name'>get[text]]}}} text='{"tiddlers":{}}' type="application/json" plugin-type="plugin" tags="preact-applet" />
+\end
+
+select favicon<$select tiddler=<<qualify '$:/temp/select-applet'>> default='icon'>
+<$list filter='[tag[preact-applet]]'>
+   <option value=<<currentTiddler>>><$view field='title'/></option>
+</$list>
+</$select>
+
+---
+<$button actions=<<update>>>
+   update applet
+</$button>
+add tiddlers<$edit-text tag=input tiddler=<<qualify '$:/temp/select-applet-adds'>>/>
+remove tiddlers<$edit-text tag=input tiddler=<<qualify '$:/temp/select-applet-dels'>>/>
+
+---
+<$button actions=<<new>>>
+   create empty applet
+</$button>
+name<$edit-text tag=input tiddler=<<qualify '$:/temp/select-applet-name'>>/>
