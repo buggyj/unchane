@@ -39,6 +39,7 @@ module-type: widget
     preactWidget.prototype.render = function(parent,nextSibling) {
         var self = this;
         this.parentDomNode = parent;
+		this.loaded=false;
         this.computeAttributes();
         this.execute();
         if (!this.domid) {
@@ -51,9 +52,8 @@ module-type: widget
         (async () => {
             try {
             const {start} = await bjModuleLoader.loadModule(this.app);
+
             const {html, render, signal, effect} =  await bjModuleLoader.loadModule ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
-
-
 	
             // Initialize an object with signals
 			try {
@@ -90,7 +90,8 @@ module-type: widget
                 //bjModuleLoader.allkeys();
                 //console.log(`Cache size after clearing: ${bjModuleLoader.numModules()}`);
             }
-          })();
+	this.loaded = true;
+		})();
     };
     
     preactWidget.prototype.makeTidMaps = function() {
@@ -166,6 +167,7 @@ module-type: widget
     */
     preactWidget.prototype.refresh = function(changedTiddlers) {
         var changedAttributes = this.computeAttributes();
+	if (!this.loaded){ console.log ("refesh called early") ;return;}
         // Completely rerender if any of our attributes have changed
         if($tw.utils.count(changedAttributes) > 0) {
             // Rerender ourselves
@@ -219,12 +221,6 @@ module-type: widget
 
     })();
     
-
-
-
-
-
-
 
 
 
