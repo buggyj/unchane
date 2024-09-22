@@ -1,4 +1,4 @@
-parent-plugin: $:/plugins/bj/tiddywiki-preact
+parent-plugin: $:/plugins/bj/tiddlywiki-preact
 plugin-type: plugin
 tags: 
 list: readme

@@ -6,7 +6,7 @@
 <$action-createtiddler $basetitle={{{[<qualify '$:/temp/select-applet-name'>get[text]]}}} text='{"tiddlers":{}}' type="application/json" plugin-type="plugin" tags="preact-applet" />
 \end
 
-select favicon<$select tiddler=<<qualify '$:/temp/select-applet'>> default='icon'>
+select applet <$select tiddler=<<qualify '$:/temp/select-applet'>> default='icon'>
 <$list filter='[tag[preact-applet]]'>
    <option value=<<currentTiddler>>><$view field='title'/></option>
 </$list>

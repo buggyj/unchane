@@ -82,7 +82,7 @@ module-type: widget
 
 			return;	
 		}     
-            render(html`<${start} __state=${this.state} __toTiddlers=${this.toTiddlers} ...${this.params}/ >`,this.domNode);
+            render(html`<${start} __state=${this.state} __toTiddlers=${this.toTiddlers} __pwidget=${this} ...${this.params}/ >`,this.domNode);
             console.log(`Cache size: ${bjModuleLoader.numModules()}`);
             } catch (error) {
                 console.error('Error in main execution:', error);

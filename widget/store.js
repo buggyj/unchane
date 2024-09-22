@@ -60,7 +60,7 @@ function twGetTextReference(ref){
        }
        return x;
     }
-    
+    exports.filterTiddlers = $tw.wiki.filterTiddlers;
     
     exports.getTextReference = getTextReference;
     exports.setTextReference = setTextReference;
