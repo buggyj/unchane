@@ -62,7 +62,7 @@ const createModuleLoader = (getModule) => {
 
     return {
         loadModule,
-        reset: () => moduleCache.clear(),
+        reset: () => {console.log("all modules reset");moduleCache.clear()},
         numModules: () => moduleCache.size,
         allkeys
     };

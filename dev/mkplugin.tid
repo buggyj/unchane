@@ -2,10 +2,19 @@
 <$macrocall $name=mkpluginmacro title={{{[<qualify '$:/temp/select-applet'>get[text]]}}} adds={{{[<qualify '$:/temp/select-applet-adds'>get[text]]}}} dels={{{[<qualify '$:/temp/select-applet-dels'>get[text]]}}}/>
 \end
 
-\define new()
-<$action-createtiddler $basetitle={{{[<qualify '$:/temp/select-applet-name'>get[text]]}}} text='{"tiddlers":{}}' type="application/json" plugin-type="plugin" tags="preact-applet" />
+\define newcomp()
+<$macrocall $name=mkpluginmacro title={{{[<qualify '$:/temp/select-applet'>get[text]]}}} rename={{{[<qualify '$:/temp/select-new-comp'>get[text]]}}} adds="$:/plugins/bj/tiddlywiki-preact/dev/blankcomp"/>
 \end
 
+
+\define new()
+<$action-createtiddler $basetitle={{{[<qualify '$:/temp/select-applet-name'>get[text]addprefix[$:/plugin/]]}}} text='{"tiddlers":{}}' type="application/json" plugin-type="plugin" tags="preact-applet" >
+
+<$macrocall $name=addtopluginmacro title=<<createTiddler-title>> rename={{{[<qualify '$:/temp/select-applet-name'>get[text]addsuffix[.mjs]]}}} source="[[$:/plugins/bj/tiddlywiki-preact/dev/blankstart.mjs]]" />
+
+</$action-createtiddler>
+\end
+---
 select applet <$select tiddler=<<qualify '$:/temp/select-applet'>> default='icon'>
 <$list filter='[tag[preact-applet]]'>
    <option value=<<currentTiddler>>><$view field='title'/></option>
@@ -13,14 +22,19 @@ select applet <$select tiddler=<<qualify '$:/temp/select-applet'>> default='icon
 </$select>
 
 ---
-<$button actions=<<update>>>
-   update applet
-</$button>
-add tiddlers<$edit-text tag=input tiddler=<<qualify '$:/temp/select-applet-adds'>>/>
-remove tiddlers<$edit-text tag=input tiddler=<<qualify '$:/temp/select-applet-dels'>>/>
+|<$button actions=<<update>>>   update applet</$button>|
+|<$edit-text tag=input tiddler=<<qualify '$:/temp/select-applet-adds'>>/>add tiddlers|
+|<$edit-text tag=input tiddler=<<qualify '$:/temp/select-applet-dels'>>/>remove tiddlers|
 
 ---
 <$button actions=<<new>>>
    create empty applet
 </$button>
-name<$edit-text tag=input tiddler=<<qualify '$:/temp/select-applet-name'>>/>
+<$edit-text tag=input tiddler=<<qualify '$:/temp/select-applet-name'>>/>name
+
+---
+
+<$button actions=<<newcomp>>>
+   create empty applet
+</$button>
+<$edit-text tag=input tiddler=<<qualify '$:/temp/select-new-comp'>>/>name

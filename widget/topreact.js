@@ -49,48 +49,59 @@ module-type: widget
         }
         else this.domNode = document.getElementById(this.domid);
         //don't wait for preact to start app - it is a leaf node and therefore doesn't have children
+		//this.loaded is used in the updates() to check that component is load before it updates
         (async () => {
             try {
-            const {start} = await bjModuleLoader.loadModule(this.app);
-
+            const {start, psignals} = await bjModuleLoader.loadModule(this.app);
+			//psignals are used to check that the correct 2waybinding (params) are given before the component is mounted
             const {html, render, signal, effect} =  await bjModuleLoader.loadModule ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
-	
+	        var psignalsX,stateX,keyX,index,valin 
+			//psignals is optional - only check params when it exists
+			if (psignals) psignalsX=Array.from(psignals) 
             // Initialize an object with signals
 			try {
-            this.state = {};
-            this.tiddlers.forEach(tid => {
-            var valin = self.getTypedTxtRef(tid);    
-            this.valin[this.fromTiddlers[tid]] = valin;    
-            this.state[this.fromTiddlers[tid]] = signal(valin);
-    
-            });
-            Object.keys(this.state).forEach(key => {
-                effect(function () {        
-                    //watch for udates from preact
-                    //mapping to tids
-                    if (self.valin[key]!=self.state[key].value) { 
-                    self.valin[key]=self.state[key].value
-                    self.setTypedTxtRef(key); 
-                
-                }
-                });
-            });
-       		}catch (e){console.log(e)
-
-					   this.makeChildWidgets(this.getErrorMessage());
-		this.renderChildren(this.domNode,null);
-
-			return;	
-		}     
+	            this.state = {};
+	            this.tiddlers.forEach(tid => {
+					if (psignals) {
+						stateX = this.fromTiddlers[tid]
+						keyX =  this.typ[stateX] + stateX
+						index = psignalsX.indexOf(keyX);
+						if (index === -1) {console.log(`miss ${keyX}`);throw ("param error")}
+						psignalsX.splice(index, 1);
+					}
+		            valin = self.getTypedTxtRef(tid);    
+		            this.valin[this.fromTiddlers[tid]] = valin;    
+		            this.state[this.fromTiddlers[tid]] = signal(valin);  
+	            });
+				if (psignals && psignalsX.length !==0) {console.log(`extra param`);throw ("param error")}
+	            Object.keys(this.state).forEach(key => {
+	                effect(function () {        
+	                    //watch for udates from preact
+	                    //mapping to tids
+	                    if (self.valin[key]!=self.state[key].value) { 
+		                    self.valin[key]=self.state[key].value
+		                    self.setTypedTxtRef(key);             
+		                }
+	                });
+	            });
+       		}catch (e){
+				console.log(e)
+				this.makeChildWidgets(this.getErrorMessage());
+				this.renderChildren(this.domNode,null);
+				return;	
+			}     
             render(html`<${start} __state=${this.state} __toTiddlers=${this.toTiddlers} __pwidget=${this} ...${this.params}/ >`,this.domNode);
-            console.log(`Cache size: ${bjModuleLoader.numModules()}`);
+            //console.log(`Cache size: ${bjModuleLoader.numModules()}`);
             } catch (error) {
                 console.error('Error in main execution:', error);
+				this.makeChildWidgets(this.getErrorMessage());
+				this.renderChildren(this.domNode,null);
+				return;	
             } finally {
                 //bjModuleLoader.allkeys();
                 //console.log(`Cache size after clearing: ${bjModuleLoader.numModules()}`);
             }
-	this.loaded = true;
+		this.loaded = true;
 		})();
     };
     
@@ -149,7 +160,7 @@ module-type: widget
         this.app = this.getAttribute("$app");
         //list of tiddlers to bind to
         this.domid = this.getAttribute("$domid");
-        this.tids = this.getAttribute("$tids");
+        this.tids = this.getAttribute("$tids","");
         this.tiddlers=$tw.utils.parseStringArray(this.tids)||[];
         this.makeTidMaps();
         this.params = [];
@@ -201,21 +212,17 @@ module-type: widget
     }
 
     preactWidget.prototype.destroy = function() {
-
-        //don't wait for preact to destroy app
-        var domNode =this.domNode;
-        (async () => {
-            try {
-            const {html, render, signal, effect} =  await bjModuleLoader.loadModule ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
-            // preact are 'leaf' nodes and so don't have children, so no need to call destroy on children
-            // this.destroyChildren();
-            // remove our resources
-            render(null, domNode);
-            domNode.parentNode.removeChild(domNode);
-            //this.children = [];
-            //this.removeLocalDomNodes();	
-            }catch (e){console.log(e)}
-    })();
+		//don't wait for preact to destroy app
+		var domNode =this.domNode;
+		(async () => {
+			try {
+				const {html, render, signal, effect} =  await bjModuleLoader.loadModule ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
+				// preact are 'leaf' nodes and so don't have children, so no need to call destroy on children
+				// remove our resources
+				render(null, domNode);
+				domNode.parentNode.removeChild(domNode);
+			}catch (e){console.log(e)}
+	    })();
     };
     exports[modname] = preactWidget;
 

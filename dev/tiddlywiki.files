@@ -7,10 +7,33 @@
 				"module-type": "library",
 				"title": "$:/plugins/bj/tiddlywiki-preact/mimport.js"
 			}
-		},		{
+		},		
+		{
 			"file": "mkplugin.tid",
 			"fields": {
 				"title": "$:/plugins/bj/tiddlywiki-preact/dev/make"
+			}
+		},
+		{
+			"file": "reload.tid",
+			"fields": {
+				"title": "$:/plugins/bj/tiddlywiki-preact/dev/reload"
+			}
+		},		
+		{
+			"file": "resetTid.tid",
+			"fields": {
+				"tags": "$:/tags/Macro",
+				"update": "update",
+				"title": "$:/temp/bj/tiddlywiki-preact/dev/resetTid"
+			}
+		},
+		{
+			"file": "addmkplugin.js",
+			"fields": {
+				"type": "application/javascript",
+				"module-type": "macro",
+				"title": "$:/plugins/bj/tiddlywiki-preact/dev/addtopluginmacro.js"
 			}
 		},
 		{
@@ -18,7 +41,14 @@
 			"fields": {
 				"type": "application/javascript",
 				"module-type": "macro",
-				"title": "$:/bj/modules/macro/mkpluginmacro.js"
+				"title": "$:/plugins/bj/tiddlywiki-preact/dev/mkpluginmacro.js"
+			}
+		},
+		{
+			"file": "reload.mjs",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/bj/tiddlywiki-preact/dev/reload.mjs"
 			}
 		}
 	]
