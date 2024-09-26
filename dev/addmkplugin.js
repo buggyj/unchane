@@ -42,10 +42,11 @@ module-type: macro
 		// Get the list of tiddlers
 		var tiddlers = Object.keys(jsonPluginTiddler.tiddlers);
 		// Add the additional tiddlers
-		$tw.utils.pushTop(tiddlers,additionalTiddler);
-
+		$tw.utils.pushTop(tiddlers,additionalTiddler)
 		// Pack up the tiddlers into a block of JSON
 		var plugins = {};
+		
+		plugins[title+"/log"]={title: title+"/log", text: "", type: "text/vnd.tiddlywiki"};
 		$tw.utils.each(tiddlers,function(title) {
 			var tiddler = $tw.wiki.getTiddler(title),
 				fields = {};console.log("--",title)
@@ -74,7 +75,7 @@ module-type: macro
 			version += "+" + pluginVersion.build;
 		}
 		// Save the tiddler
-		$tw.wiki.addTiddler(new $tw.Tiddler(pluginTiddler,{text: JSON.stringify({tiddlers: plugins},null,4), version: version}));
+		$tw.wiki.addTiddler(new $tw.Tiddler(pluginTiddler,{text: JSON.stringify({tiddlers: plugins},null,4), version: version, list:"log"}));
 		// Trigger an autosave
 		$tw.rootWidget.dispatchEvent({type: "tm-auto-save-wiki"});
 		// Return a heartwarming confirmation

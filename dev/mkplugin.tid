@@ -1,5 +1,5 @@
 \define update()
-<$macrocall $name=mkpluginmacro title={{{[<qualify '$:/temp/select-applet'>get[text]]}}} adds={{{[<qualify '$:/temp/select-applet-adds'>get[text]]}}} dels={{{[<qualify '$:/temp/select-applet-dels'>get[text]]}}}/>
+<$macrocall $name=mkpluginmacro title={{{[<qualify '$:/temp/select-applet'>get[text]]}}} adds={{{[<qualify '$:/temp/select-applet-adds'>get[text]]}}} dels={{{[<qualify '$:/temp/select-applet-dels'>get[text]]}}} comment={{{[<qualify '$:/temp/select-new-comment'>get[text]]}}} />
 \end
 
 \define newcomp()
@@ -26,6 +26,7 @@ select applet <$select tiddler=<<qualify '$:/temp/select-applet'>> default='icon
 |<$edit-text tag=input tiddler=<<qualify '$:/temp/select-applet-adds'>>/>add tiddlers|
 |<$edit-text tag=input tiddler=<<qualify '$:/temp/select-applet-dels'>>/>remove tiddlers|
 
+|<$edit-text tag=input tiddler=<<qualify '$:/temp/select-new-comment'>>/>comment|
 ---
 <$button actions=<<new>>>
    create empty applet
@@ -34,7 +35,3 @@ select applet <$select tiddler=<<qualify '$:/temp/select-applet'>> default='icon
 
 ---
 
-<$button actions=<<newcomp>>>
-   create empty applet
-</$button>
-<$edit-text tag=input tiddler=<<qualify '$:/temp/select-new-comp'>>/>name

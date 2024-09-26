@@ -17,13 +17,13 @@ module-type: macro
 	exports.name = "mkpluginmacro";
 	
 	exports.params = [
-		{name: "title"},{name: "adds"},{name: "dels"}
+		{name: "title"},{name: "adds"},{name: "dels"},{name:"comment"}
 	];
 	
 	/*
 	Run the macro
 	*/
-	exports.run = function(title,adds,dels) {
+	exports.run = function(title,adds,dels,comment) {
 		var additionalTiddlers = adds||"";
 		var excludeTiddlers = dels||"" ;
 		// Get the plugin tiddler
@@ -32,8 +32,26 @@ module-type: macro
 			throw "No such tiddler as " + title;
 		}
 		console.log(pluginTiddler)
+
+		// Retrieve and bump the version number
+		var pluginVersion = $tw.utils.parseVersion(pluginTiddler.getFieldString("version") || "0.0.0") || {
+				major: "0",
+				minor: "0",
+				patch: "0"
+			};
+		pluginVersion.patch++;
+		var version = pluginVersion.major + "." + pluginVersion.minor + "." + pluginVersion.patch;
+		if(pluginVersion.prerelease) {
+			version += "-" + pluginVersion.prerelease;
+		}
+		if(pluginVersion.build) {
+			version += "+" + pluginVersion.build;
+		}
+
 		additionalTiddlers=$tw.wiki.filterTiddlers(additionalTiddlers);
 		excludeTiddlers=$tw.wiki.filterTiddlers(excludeTiddlers);
+
+
 		var jsonPluginTiddler = $tw.utils.parseJSONSafe(pluginTiddler.fields.text,null);
 		if(!jsonPluginTiddler) {
 			throw "Cannot parse plugin tiddler " + title + "\n" + $tw.language.getString("Error/Caption") + ": " + e;
@@ -48,6 +66,7 @@ module-type: macro
 				tiddlers.splice(t,1);
 			}
 		}
+
 		// Pack up the tiddlers into a block of JSON
 		var plugins = {};
 		$tw.utils.each(tiddlers,function(title) {
@@ -63,20 +82,9 @@ module-type: macro
 			});
 			plugins[title] = fields;
 		});
-		// Retrieve and bump the version number
-		var pluginVersion = $tw.utils.parseVersion(pluginTiddler.getFieldString("version") || "0.0.0") || {
-				major: "0",
-				minor: "0",
-				patch: "0"
-			};
-		pluginVersion.patch++;
-		var version = pluginVersion.major + "." + pluginVersion.minor + "." + pluginVersion.patch;
-		if(pluginVersion.prerelease) {
-			version += "-" + pluginVersion.prerelease;
-		}
-		if(pluginVersion.build) {
-			version += "+" + pluginVersion.build;
-		}
+		if (plugins[title+"/log"]) {
+			plugins[title+"/log"].text+= "\n\n"+version + " " + comment;
+		} 
 		// Save the tiddler
 		var removeFields = {adds:undefined,dels:undefined};
 		$tw.wiki.addTiddler(new $tw.Tiddler(pluginTiddler,{text: JSON.stringify({tiddlers: plugins},null,4), version: version},removeFields));

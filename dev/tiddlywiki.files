@@ -48,7 +48,15 @@
 			"file": "reload.mjs",
 			"fields": {
 				"type": "application/javascript",
+				"module-type": "library",
 				"title": "$:/plugins/bj/tiddlywiki-preact/dev/reload.mjs"
+			}
+		},
+		{
+			"file": "blankstart.mjs",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/bj/tiddlywiki-preact/dev/blankstart.mjs"
 			}
 		}
 	]
