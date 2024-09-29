@@ -44,7 +44,13 @@ const createModuleLoader = (getModule, basic) => {
 				delete globalThis[`__privateLoadModule${name}`];
 				moduleCache.set(id, module);
 				return module;
-			}catch(e) {console.log("failed at import ",id,e);return moduleCache.get(id);}
+			}catch(e) {
+				//maybe we have it already 
+				const module = moduleCache.get(id);
+				if (module) return module;
+				console.log("failed at import ",id,e);
+				throw e;
+			}
         
         } catch (error) {
             console.error(`Error loading module ${id}: ${error}`);
