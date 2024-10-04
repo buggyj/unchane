@@ -1,0 +1,7 @@
+select applet <$select tiddler=<<qualify '$:/temp/select-applet'>> default='icon'>
+<$list filter='[tag[preact-applet]]'>
+   <option value=<<currentTiddler>>><$view field='title'/></option>
+</$list>
+</$select>
+
+<$pwidget $app="$:/plugins/bj/tiddlywiki-preact/dev/updateApplet.mjs"  title={{{[<qualify '$:/temp/select-applet'>get[text]]}}}/>

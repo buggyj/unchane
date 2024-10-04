@@ -37,17 +37,22 @@ module-type: widget
     */
     
     preactWidget.prototype.render = function(parent,nextSibling) {
-        var self = this;
+        var self = this,error=false;
         this.parentDomNode = parent;
 		this.loaded=false;
         this.computeAttributes();
-        this.execute();
+        error = this.execute();
         if (!this.domid) {
             this.domNode = this.document.createElement("div");
             this.domNodes.push(this.domNode);
             parent.insertBefore(this.domNode,nextSibling);
         }
         else this.domNode = document.getElementById(this.domid);
+		if (error) {
+			this.makeChildWidgets(this.getErrorMessage());
+			this.renderChildren(this.domNode,null);
+			return;
+		}
         //don't wait for preact to start app - it is a leaf node and therefore doesn't have children
 		//this.loaded is used in the updates() to check that component is load before it updates
         (async () => {
@@ -158,6 +163,10 @@ module-type: widget
     preactWidget.prototype.execute = function() {
         let self =this;
         this.app = this.getAttribute("$app");
+		if (!this.wiki.tiddlerExists(this.app) && !this.wiki.isShadowTiddler(this.app)){
+			console.error(`missing tiddler ${this.app}`)
+			return true
+		}
         //list of tiddlers to bind to
         this.domid = this.getAttribute("$domid");
         this.tids = this.getAttribute("$tids","");

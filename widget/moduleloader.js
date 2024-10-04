@@ -17,7 +17,7 @@ const createModuleLoader = (getModule, basic) => {
 
     async function loadModule(id) {
         //replaces import() for internal modules
-        if (id.startsWith('http://') || id.startsWith('https://') || id.startsWith('file://')) {
+        if (id.startsWith('http://') || id.startsWith('https://') || id.startsWith('file://')|| id.startsWith('./')) {
             return await import(id);// external files can use native import()
         }
         if (id.endsWith('.js')) {
@@ -43,6 +43,8 @@ const createModuleLoader = (getModule, basic) => {
             try{const module = await import(codeAsDataURL);//compile into a module
 				delete globalThis[`__privateLoadModule${name}`];
 				moduleCache.set(id, module);
+                //note that the 'codeAsDataURL' is a uuid64 and 
+                //from inside the module accessed via export.meta.url - maybe should store here with map back to tid-name??
 				return module;
 			}catch(e) {
 				//maybe we have it already 

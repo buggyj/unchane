@@ -29,22 +29,6 @@
 			}
 		},
 		{
-			"file": "addmkplugin.js",
-			"fields": {
-				"type": "application/javascript",
-				"module-type": "macro",
-				"title": "$:/plugins/bj/tiddlywiki-preact/dev/addtopluginmacro.js"
-			}
-		},
-		{
-			"file": "mkplugin.js",
-			"fields": {
-				"type": "application/javascript",
-				"module-type": "macro",
-				"title": "$:/plugins/bj/tiddlywiki-preact/dev/mkpluginmacro.js"
-			}
-		},
-		{
 			"file": "reload.mjs",
 			"fields": {
 				"type": "application/javascript",
@@ -56,7 +40,68 @@
 			"file": "blankstart.mjs",
 			"fields": {
 				"type": "application/javascript",
+				"module-type": "library",
 				"title": "$:/plugins/bj/tiddlywiki-preact/dev/blankstart.mjs"
+			}
+		},
+		{
+			"file": "callcreateapp",
+			"fields": {
+				"title": "$:/plugins/bj/tiddlywiki-preact/dev/callCreateApplet"
+			}
+		},
+		{
+			"file": "callupdateapp",
+			"fields": {
+				"title": "$:/plugins/bj/tiddlywiki-preact/dev/callUpdateApp"
+			}
+		},
+		{
+			"file": "createapplet.mjs",
+			"fields": {
+				"type": "application/javascript",
+				"module-type": "library",
+				"title": "$:/plugins/bj/tiddlywiki-preact/dev/createApplet.mjs"
+			}
+		},
+		{
+			"file": "modulecreateapplet.mjs",
+			"fields": {
+				"type": "application/javascript",
+				"module-type": "library",
+				"title": "$:/plugins/bj/tiddlywiki-preact/dev/module/createApplet.mjs"
+			}
+		},
+		{
+			"file": "modulemodapplet.mjs",
+			"fields": {
+				"type": "application/javascript",
+				"module-type": "library",
+				"title": "$:/plugins/bj/tiddlywiki-preact/dev/module/modApplet.mjs"
+			}
+		},
+		{
+			"file": "modulenewapplet.mjs",
+			"fields": {
+				"type": "application/javascript",
+				"module-type": "library",
+				"title": "$:/plugins/bj/tiddlywiki-preact/dev/module/newApplet.mjs"
+			}
+		},
+		{
+			"file": "moduleupdateapplet.mjs",
+			"fields": {
+				"type": "application/javascript",
+				"module-type": "library",
+				"title": "$:/plugins/bj/tiddlywiki-preact/dev/module/updateApplet.mjs"
+			}
+		},
+		{
+			"file": "updateapplet.mjs",
+			"fields": {
+				"type": "application/javascript",
+				"module-type": "library",
+				"title": "$:/plugins/bj/tiddlywiki-preact/dev/updateApplet.mjs"
 			}
 		}
 	]

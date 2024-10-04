@@ -7,14 +7,6 @@
 				"module-type": "library",
 				"title": "$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs"
 			}
-		},
-		{
-			"file": "originalstandalone.js",
-			"fields": {
-				"type": "application/javascript",
-				"module-type": "library",
-				"title": "$:/plugins/bj/tiddlywiki-preact/originalpreactsignal.mjs"
-			}
 		}
 	]
 }
