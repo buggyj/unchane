@@ -1,0 +1,7 @@
+{{$:/plugins/bj/tiddlywiki-preact/dev/reload}}
+
+---
+{{$:/plugins/bj/tiddlywiki-preact/dev/callUpdateApp}}
+
+---
+{{$:/plugins/bj/tiddlywiki-preact/dev/callCreateApplet}}

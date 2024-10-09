@@ -16,8 +16,8 @@ export function updateApplet({title}){
 	<button onClick=${()=>{if (!!title)handleButtonClick(title,adds,dels,comment);else alert("add title")}}>
          update Applet
     </button><br/>
+	<input type="text" value=${comment} onInput=${(e) => {setComment( e.target.value);}} /> comment<br/>
 	<input type="text" value=${adds} onInput=${(e) => {setAdds( e.target.value);}} /> adds<br/>
-	<input type="text" value=${dels} onInput=${(e) => {setDels( e.target.value);}} /> dels<br/>
-	<input type="text" value=${comment} onInput=${(e) => {setComment( e.target.value);}} /> comment
+	<input type="text" value=${dels} onInput=${(e) => {setDels( e.target.value);}} /> dels
 	`
 }

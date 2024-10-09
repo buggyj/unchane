@@ -3,11 +3,11 @@ title: $:/plugins/bj/tiddlywiki-preact/utils.mjs
 type: application/javascript
 module-type: library
 \*/
-// modified from tiddlywiki's $:/core/modules/widgets/action-createtiddler.js
 const {generateNewTitle, getCreationFields, getModificationFields, getTiddler, addTiddler, Tiddler} = await import ("$:/plugins/bj/tiddlywiki-preact/storeutils.js")
 
 const {getTextReference} =  await import("$:/plugins/bj/tiddlywiki-preact/store.js");
 
+// modified from tiddlywiki's $:/core/modules/widgets/action-createtiddler.js
 export function newTiddler({basetitle,timestamp="yes",override="no",template,fields}){
 	let actionOverwrite=override,actionTimestamp=timestamp,
 		actionBaseTitle=basetitle,hasBase=!!basetitle,actionTemplate=template,useTemplate=!!actionTemplate

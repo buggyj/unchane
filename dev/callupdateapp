@@ -1,7 +1,13 @@
-select applet <$select tiddler=<<qualify '$:/temp/select-applet'>> default='icon'>
+<$let TidForSelect=<<qualify '$:/temp/select-applet'>> sel={{{[<TidForSelect>get[text]]}}} selected=`${[<sel>]}$/` color={{{[prefix<selected>then[salmon]else[white]]}}}>
+''''
+select applet <$select tiddler=<<qualify '$:/temp/select-applet'>> default='' style.background-color=<<color>>>
 <$list filter='[tag[preact-applet]]'>
-   <option value=<<currentTiddler>>><$view field='title'/></option>
+<$vars pluginsofcur=`$(currentTiddler)$/`>
+   <option style={{{[prefix<pluginsofcur>then[background-color:salmon]else[background-color:white]]}}} value=<<currentTiddler>>><$view field='title'/></option></$vars>
 </$list>
 </$select>
 
 <$pwidget $app="$:/plugins/bj/tiddlywiki-preact/dev/updateApplet.mjs"  title={{{[<qualify '$:/temp/select-applet'>get[text]]}}}/>
+
+---
+<$pwidget $app="$:/plugins/bj/tiddlywiki-preact/dev/newInApplet.mjs"  title={{{[<qualify '$:/temp/select-applet'>get[text]]}}}/>

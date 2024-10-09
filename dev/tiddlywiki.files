@@ -27,6 +27,12 @@
 				"update": "update",
 				"title": "$:/temp/bj/tiddlywiki-preact/dev/resetTid"
 			}
+		},		{
+			"file": "sidebar.tid",
+			"fields": {
+				"tags": "$:/tags/SideBar",
+				"title": "$:/plugins/bj/tiddlywiki-preact/dev/sidebar"
+			}
 		},
 		{
 			"file": "reload.mjs",
@@ -102,6 +108,22 @@
 				"type": "application/javascript",
 				"module-type": "library",
 				"title": "$:/plugins/bj/tiddlywiki-preact/dev/updateApplet.mjs"
+			}
+		},
+		{
+			"file": "newinapplet.mjs",
+			"fields": {
+				"type": "application/javascript",
+				"module-type": "library",
+				"title": "$:/plugins/bj/tiddlywiki-preact/dev/newInApplet.mjs"
+			}
+		},
+		{
+			"file": "modulenewinapplet.mjs",
+			"fields": {
+				"type": "application/javascript",
+				"module-type": "library",
+				"title": "$:/plugins/bj/tiddlywiki-preact/dev/module/newInApplet.mjs"
 			}
 		}
 	]
