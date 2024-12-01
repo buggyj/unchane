@@ -22,8 +22,8 @@ function newInApplet(title,name){
 	var tiddlers = jsonPluginTiddler.tiddlers
 	
 	if (!!tiddlers[title+"/"+name+".mjs"]) {console.log("exits");return false;}
-	tiddlers[title+"/"+name+".mjs"]={title: title+"/"+name+".mjs", text: "", type: "application/javascript"};
-
+	tiddlers[title+"/"+name+".mjs"]={title: title+"/"+name+".mjs", text: "", type: "application/javascript", };
+	tiddlers[title+"/"+name+".mjs"]["module-type"]="library"
 	// Save the tiddler
 	addTiddler(new Tiddler(pluginTiddler,{text: JSON.stringify({tiddlers: tiddlers},null,4), version: version, list:"log"}));
 	return true;

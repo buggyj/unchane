@@ -42,12 +42,12 @@ module-type: widget
 		this.loaded=false;
         this.computeAttributes();
         error = this.execute();
-        if (!this.domid) {
+        if (!this.selector) {
             this.domNode = this.document.createElement("div");
             this.domNodes.push(this.domNode);
             parent.insertBefore(this.domNode,nextSibling);
         }
-        else this.domNode = document.getElementById(this.domid);
+        else this.domNode = document.querySelector(this.selector);
 		if (error) {
 			this.makeChildWidgets(this.getErrorMessage());
 			this.renderChildren(this.domNode,null);
@@ -168,7 +168,7 @@ module-type: widget
 			return true
 		}
         //list of tiddlers to bind to
-        this.domid = this.getAttribute("$domid");
+        this.selector = this.getAttribute("$selector");
         this.tids = this.getAttribute("$tids","");
         this.tiddlers=$tw.utils.parseStringArray(this.tids)||[];
         this.makeTidMaps();

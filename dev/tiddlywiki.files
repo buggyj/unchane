@@ -31,6 +31,7 @@
 			"file": "sidebar.tid",
 			"fields": {
 				"tags": "$:/tags/SideBar",
+				"caption": "dev",
 				"title": "$:/plugins/bj/tiddlywiki-preact/dev/sidebar"
 			}
 		},
