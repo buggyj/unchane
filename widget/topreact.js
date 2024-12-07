@@ -229,7 +229,8 @@ module-type: widget
 				// preact are 'leaf' nodes and so don't have children, so no need to call destroy on children
 				// remove our resources
 				render(null, domNode);
-				domNode.parentNode.removeChild(domNode);
+				//domNode.parentNode.removeChild(domNode);
+                this.removeLocalDomNodes();
 			}catch (e){console.log(e)}
 	    })();
     };

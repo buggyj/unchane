@@ -3,11 +3,15 @@
 	"plugins": [
 		"tiddlywiki/tiddlyweb",
 		"tiddlywiki/filesystem",
-		"bj/tiddlywiki-preact/dev"
+		"bj/tiddlywiki-preact/dev",
+		"bj/tiddlywiki-preact"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite"
+	],
+	"includeWikis": [
+		"../demo"
 	],
 	"config": {
 		"default-tiddler-location": "../demo/tiddlers"

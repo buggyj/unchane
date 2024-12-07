@@ -4,9 +4,9 @@ type: application/javascript
 module-type: library
 \*/
 const createModuleLoader = (getModule, basic) => {
-    const moduleCache = new Map();
+    const moduleCache = new Map()
 
-
+    const pending = []
     function replaceImports(code) {
         subst = '__privateLoadModule($1$2$1)';
         return code.replace(
@@ -16,6 +16,13 @@ const createModuleLoader = (getModule, basic) => {
     }
 
     async function loadModule(id) {
+		function importModule(id,code) {
+			// If the module is already being imported, return the existing Promise
+			if (!pending[id]) {
+			   pending[id] = import(code);
+			}
+			return pending[id];
+		}
         //replaces import() for internal modules
         if (id.startsWith('http://') || id.startsWith('https://') || id.startsWith('file://')|| id.startsWith('./')) {
             return await import(id);// external files can use native import()
@@ -28,6 +35,7 @@ const createModuleLoader = (getModule, basic) => {
         }
 
         let codeAsDataURL;
+        //console.log("before at import ",id);
         try { 
             let code = getModule(id);
             code = replaceImports(code);
@@ -40,9 +48,15 @@ const createModuleLoader = (getModule, basic) => {
 
             // globalize loader so that it can be compiled in with the modules to override their import()s
             globalThis[`__privateLoadModule${name}`] = loadModule;
-            try{const module = await import(codeAsDataURL);//compile into a module
+            try{
+				const module = await importModule(id,codeAsDataURL);//compile into a module
 				delete globalThis[`__privateLoadModule${name}`];
-				moduleCache.set(id, module);
+				pending[id] = null
+				if (!moduleCache.has(id)) {
+					moduleCache.set(id, module);//ignore if another has already set this,
+					//console.log("set at import ",id);
+				} //else
+					//console.log("notset at import ",id);
                 //note that the 'codeAsDataURL' is a uuid64 and 
                 //from inside the module accessed via export.meta.url - maybe should store here with map back to tid-name??
 				return module;
@@ -75,6 +89,7 @@ const createModuleLoader = (getModule, basic) => {
         return {
             loadModule,
             reset: () => {moduleCache.clear();console.log("all modules reset")},
+            del: (x) => {console.log('has',moduleCache.has(x));moduleCache.delete(x);console.log('nowhas',moduleCache.has(x))},
             numModules: () => moduleCache.size,
             allkeys
         };
