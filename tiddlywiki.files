@@ -2,7 +2,6 @@
 	"tiddlers": [{
 		"file": "license.tid",
 		"fields": {
-			"type": "text/plain",
 			"title": "$:/plugins/bj/tiddlywiki-preact/license"
 		}
 	},
