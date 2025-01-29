@@ -10,7 +10,7 @@ module-type: widget
     /*jslint node: true, browser: true */
     /*global $tw: false */
     "use strict";
-    
+    var loadModuleP = null;
     var modname = "pwidget";
     var Widget = require("$:/core/modules/widgets/widget.js").widget;
     const {setTxtRef,getTxtRef,typeChars} =  require("$:/plugins/bj/tiddlywiki-preact/store.js");
@@ -55,11 +55,12 @@ module-type: widget
 		}
         //don't wait for preact to start app - it is a leaf node and therefore doesn't have children
 		//this.loaded is used in the updates() to check that component is load before it updates
-        (async () => {
+        ;(async () => {
             try {
             const {start, psignals} = await bjModuleLoader.loadModule(this.app);
 			//psignals are used to check that the correct 2waybinding (params) are given before the component is mounted
-            const {html, render, signal, effect} =  await bjModuleLoader.loadModule ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
+			if (!loadModuleP) loadModuleP = await bjModuleLoader.loadModule ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
+            const {html, render, signal, effect} = loadModuleP 
 	        var psignalsX,stateX,keyX,index,valin 
 			//psignals is optional - only check params when it exists
 			if (psignals) psignalsX=Array.from(psignals) 
@@ -222,17 +223,16 @@ module-type: widget
 
     preactWidget.prototype.destroy = function() {
 		//don't wait for preact to destroy app
-		var domNode =this.domNode;
-		(async () => {
+		var domNode =this.domNode
+		this.removeLocalDomNodes()
+		;(async () => {
 			try {
-				const {html, render, signal, effect} =  await bjModuleLoader.loadModule ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
+				if (!loadModuleP) loadModuleP = await bjModuleLoader.loadModule ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
+				const {html, render, signal, effect} =  loadModuleP;
 				// preact are 'leaf' nodes and so don't have children, so no need to call destroy on children
-				// remove our resources
 				render(null, domNode);
-				//domNode.parentNode.removeChild(domNode);
-                this.removeLocalDomNodes();
 			}catch (e){console.log(e)}
-	    })();
+	    })()
     };
     exports[modname] = preactWidget;
 
