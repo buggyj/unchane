@@ -1,0 +1,8 @@
+tiddlywiki-preact modules are es11 compatible, with the restricion that with import(x) x must be a string or a string literal.
+
+To use non-const paths to libraries, use string literals, eg
+
+```
+const BarChartLib = 'chartist'
+const { BarChart } = await import(`https://cdn.jsdelivr.net/npm/${BarChartLib}/+esm`);
+```

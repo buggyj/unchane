@@ -6,6 +6,12 @@
 		}
 	},
 	{
+		"file": "compat.tid",
+		"fields": {
+			"title": "$:/plugins/bj/tiddlywiki-preact/compatiblity"
+		}
+	},
+	{
 		"file": "readme.tid",
 		"fields": {
 			"title": "$:/plugins/bj/tiddlywiki-preact/readme"

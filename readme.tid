@@ -19,9 +19,10 @@ by adding a ":", or bool with a""?") A tiddler field can be connect by using a t
 ```
 
 
-Other non-reactive parameters are added  to the pwidget as normal tiddlywiki widget parameters, and are passed to preact props of the same name eg "title".
+Other non-reactive parameters are added  to the pwidget as normal tiddlywiki widget parameters, and are passed to preact props of the same name eg "title" above.
 
-
-The `preact modules` are expected to be `es6`, but only using `await import(...)` and their `tiddler title` should end with `.mjs`
 
 Errors with mapping tids to preact variables (non-existante tids for example) will result in the widget not appearing. An error message can be pass to the widgets  'errorMessage' parameter which will be displayed when errors occur.
+
+
+Javascript Compatibility - see the compatiblity tab. 

@@ -24,6 +24,8 @@ module-type: widget
     */
     preactWidget.prototype = new Widget();    
     
+    preactWidget.prototype.libpath = "$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs";
+    
     preactWidget.prototype.setTypedTxtRef= function(key){
         return setTxtRef(this.typ[key],this.toTiddlers[key],this.state[key].value);     
     }
@@ -59,7 +61,7 @@ module-type: widget
             try {
             const {start, psignals} = await bjModuleLoader.loadModule(this.app);
 			//psignals are used to check that the correct 2waybinding (params) are given before the component is mounted
-			if (!loadModuleP) loadModuleP = await bjModuleLoader.loadModule ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
+			if (!loadModuleP) loadModuleP = await bjModuleLoader.loadModule (`${this.libpath}`);
             const {html, render, signal, effect} = loadModuleP 
 	        var psignalsX,stateX,keyX,index,valin 
 			//psignals is optional - only check params when it exists
@@ -227,8 +229,8 @@ module-type: widget
 		this.removeLocalDomNodes()
 		;(async () => {
 			try {
-				if (!loadModuleP) loadModuleP = await bjModuleLoader.loadModule ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
-				const {html, render, signal, effect} =  loadModuleP;
+				if (!loadModuleP) loadModuleP = await bjModuleLoader.loadModule (`${this.libpath}`);
+				const {render} =  loadModuleP;
 				// preact are 'leaf' nodes and so don't have children, so no need to call destroy on children
 				render(null, domNode);
 			}catch (e){console.log(e)}
