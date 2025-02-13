@@ -46,6 +46,7 @@ module-type: widget
         error = this.execute();
         if (!this.selector) {
             this.domNode = this.document.createElement("div");
+            this.domNode.className =this["class"]|| ""
             this.domNodes.push(this.domNode);
             parent.insertBefore(this.domNode,nextSibling);
         }
@@ -173,6 +174,7 @@ module-type: widget
         //list of tiddlers to bind to
         this.selector = this.getAttribute("$selector");
         this.tids = this.getAttribute("$tids","");
+        this["class"] = this.getAttribute("class","");
         this.tiddlers=$tw.utils.parseStringArray(this.tids)||[];
         this.makeTidMaps();
         this.params = [];
