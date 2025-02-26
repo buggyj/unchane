@@ -3,8 +3,8 @@
 	"plugins": [
 		"tiddlywiki/tiddlyweb",
 		"tiddlywiki/filesystem",
-		"bj/tiddlywiki-preact/dev",
-		"bj/tiddlywiki-preact"
+		"bj/unchane/dev",
+		"bj/unchane"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

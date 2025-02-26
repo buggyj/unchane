@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/bj/tiddlywiki-preact/towidget.mjs
+title: $:/plugins/bj/unchane/towidget.mjs
 type: application/javascript
 module-type: library
 \*/

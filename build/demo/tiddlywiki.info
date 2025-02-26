@@ -1,6 +1,6 @@
 {
 	"plugins": [
-		"bj/tiddlywiki-preact"
+		"bj/unchane"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

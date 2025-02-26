@@ -1,5 +1,5 @@
 
-const {html, render} = await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
+const {html, render} = await import ("$:/plugins/bj/unchane/preactsignal.mjs");
 
 //const { yourcode } = await import ('$:/yourmodule/preactjs/module.mjs');
  

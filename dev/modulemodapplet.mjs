@@ -1,7 +1,7 @@
 
-const {html} = await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs")
+const {html} = await import ("$:/plugins/bj/unchane/preactsignal.mjs")
 
-const {pushTop, each, getTiddler, addTiddler,  parseVersion, filterTiddlers,  Tiddler, parseJSONSafe, languageGetString, tiddlerExists, deleteTiddler} = await import ("$:/plugins/bj/tiddlywiki-preact/storeutils.js")
+const {pushTop, each, getTiddler, addTiddler,  parseVersion, filterTiddlers,  Tiddler, parseJSONSafe, languageGetString, tiddlerExists, deleteTiddler} = await import ("$:/plugins/bj/unchane/storeutils.js")
 
 export function modApplet(title,adds,dels,comment){
 		var additionalTiddlers = adds||"";

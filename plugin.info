@@ -1,12 +1,12 @@
 {
-	"title": "$:/plugins/bj/tiddlywiki-preact",
-    "name":"tiddywilki-preact",
+	"title": "$:/plugins/bj/unchane",
+    "name":"unchane",
 	"description": "interface to preact with signals and htm",
 	"author": "Jeffrey Wilkinson (BJ)",
 	"version": "0.0.20",
 	"plugin-priority":2,
 	"list": "readme license compatiblity",
 	"core-version": ">=5.3.0",
-	"source": "https://github.com/buggyj/tiddlywiki-preact",
+	"source": "https://github.com/buggyj/unchane",
 	"plugin-type": "plugin"
 }

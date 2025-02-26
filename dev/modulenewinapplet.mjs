@@ -1,7 +1,7 @@
 
-const {html, useState} = await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs")
+const {html, useState} = await import ("$:/plugins/bj/unchane/preactsignal.mjs")
 
-const {getTiddler, addTiddler, Tiddler, parseJSONSafe} = await import ("$:/plugins/bj/tiddlywiki-preact/storeutils.js")
+const {getTiddler, addTiddler, Tiddler, parseJSONSafe} = await import ("$:/plugins/bj/unchane/storeutils.js")
 
 function newInApplet(title,name){
 
@@ -31,7 +31,7 @@ function newInApplet(title,name){
 }
 
 
-const {setTextReference} = await import ('$:/plugins/bj/tiddlywiki-preact/store.js')
+const {setTextReference} = await import ('$:/plugins/bj/unchane/store.js')
  
 const handleButtonClick = (title,name) => {
 	if(newInApplet(title,name)) setTextReference("$:/status/RequireReloadDueToPluginChange","yes")

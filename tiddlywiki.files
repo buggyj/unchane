@@ -2,19 +2,19 @@
 	"tiddlers": [{
 		"file": "license.tid",
 		"fields": {
-			"title": "$:/plugins/bj/tiddlywiki-preact/license"
+			"title": "$:/plugins/bj/unchane/license"
 		}
 	},
 	{
 		"file": "compat.tid",
 		"fields": {
-			"title": "$:/plugins/bj/tiddlywiki-preact/compatiblity"
+			"title": "$:/plugins/bj/unchane/compatiblity"
 		}
 	},
 	{
 		"file": "readme.tid",
 		"fields": {
-			"title": "$:/plugins/bj/tiddlywiki-preact/readme"
+			"title": "$:/plugins/bj/unchane/readme"
 		}
 	}],
 	 "directories": [

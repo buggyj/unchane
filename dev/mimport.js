@@ -1,10 +1,10 @@
 /*\
-title: $:/plugins/bj/tiddlywiki-preact/mimport.js
+title: $:/plugins/bj/unchane/mimport.js
 type: application/javascript
 module-type: library
 \*/
 
-const createModuleLoader=require("$:/plugins/bj/tiddlywiki-preact/moduleloader.js").createModuleLoader;
+const createModuleLoader=require("$:/plugins/bj/unchane/moduleloader.js").createModuleLoader;
 
 exports.bjModuleLoader = (() => { 
 	//expose globally to allow console commands

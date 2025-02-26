@@ -1,7 +1,7 @@
 
-const {html, render} = await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
+const {html, render} = await import ("$:/plugins/bj/unchane/preactsignal.mjs");
 
-const { updateApplet } = await import ('$:/plugins/bj/tiddlywiki-preact/dev/module/updateApplet.mjs');
+const { updateApplet } = await import ('$:/plugins/bj/unchane/dev/module/updateApplet.mjs');
  
 export function start(props) {
 

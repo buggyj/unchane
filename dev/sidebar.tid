@@ -1,7 +1,7 @@
-{{$:/plugins/bj/tiddlywiki-preact/dev/reload}}
+{{$:/plugins/bj/unchane/dev/reload}}
 
 ---
-{{$:/plugins/bj/tiddlywiki-preact/dev/callUpdateApp}}
+{{$:/plugins/bj/unchane/dev/callUpdateApp}}
 
 ---
-{{$:/plugins/bj/tiddlywiki-preact/dev/callCreateApplet}}
+{{$:/plugins/bj/unchane/dev/callCreateApplet}}

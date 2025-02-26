@@ -5,19 +5,19 @@
 			"fields": {
 				"type": "application/javascript",
 				"module-type": "library",
-				"title": "$:/plugins/bj/tiddlywiki-preact/mimport.js"
+				"title": "$:/plugins/bj/unchane/mimport.js"
 			}
 		},		
 		{
 			"file": "mkplugin.tid",
 			"fields": {
-				"title": "$:/plugins/bj/tiddlywiki-preact/dev/make"
+				"title": "$:/plugins/bj/unchane/dev/make"
 			}
 		},
 		{
 			"file": "reload.tid",
 			"fields": {
-				"title": "$:/plugins/bj/tiddlywiki-preact/dev/reload"
+				"title": "$:/plugins/bj/unchane/dev/reload"
 			}
 		},		
 		{
@@ -25,14 +25,14 @@
 			"fields": {
 				"tags": "$:/tags/Macro",
 				"update": "update",
-				"title": "$:/temp/bj/tiddlywiki-preact/dev/resetTid"
+				"title": "$:/temp/bj/unchane/dev/resetTid"
 			}
 		},		{
 			"file": "sidebar.tid",
 			"fields": {
 				"tags": "$:/tags/SideBar",
 				"caption": "dev",
-				"title": "$:/plugins/bj/tiddlywiki-preact/dev/sidebar"
+				"title": "$:/plugins/bj/unchane/dev/sidebar"
 			}
 		},
 		{
@@ -40,7 +40,7 @@
 			"fields": {
 				"type": "application/javascript",
 				"module-type": "library",
-				"title": "$:/plugins/bj/tiddlywiki-preact/dev/reload.mjs"
+				"title": "$:/plugins/bj/unchane/dev/reload.mjs"
 			}
 		},
 		{
@@ -48,19 +48,19 @@
 			"fields": {
 				"type": "application/javascript",
 				"module-type": "library",
-				"title": "$:/plugins/bj/tiddlywiki-preact/dev/blankstart.mjs"
+				"title": "$:/plugins/bj/unchane/dev/blankstart.mjs"
 			}
 		},
 		{
 			"file": "callcreateapp",
 			"fields": {
-				"title": "$:/plugins/bj/tiddlywiki-preact/dev/callCreateApplet"
+				"title": "$:/plugins/bj/unchane/dev/callCreateApplet"
 			}
 		},
 		{
 			"file": "callupdateapp",
 			"fields": {
-				"title": "$:/plugins/bj/tiddlywiki-preact/dev/callUpdateApp"
+				"title": "$:/plugins/bj/unchane/dev/callUpdateApp"
 			}
 		},
 		{
@@ -68,7 +68,7 @@
 			"fields": {
 				"type": "application/javascript",
 				"module-type": "library",
-				"title": "$:/plugins/bj/tiddlywiki-preact/dev/createApplet.mjs"
+				"title": "$:/plugins/bj/unchane/dev/createApplet.mjs"
 			}
 		},
 		{
@@ -76,7 +76,7 @@
 			"fields": {
 				"type": "application/javascript",
 				"module-type": "library",
-				"title": "$:/plugins/bj/tiddlywiki-preact/dev/module/createApplet.mjs"
+				"title": "$:/plugins/bj/unchane/dev/module/createApplet.mjs"
 			}
 		},
 		{
@@ -84,7 +84,7 @@
 			"fields": {
 				"type": "application/javascript",
 				"module-type": "library",
-				"title": "$:/plugins/bj/tiddlywiki-preact/dev/module/modApplet.mjs"
+				"title": "$:/plugins/bj/unchane/dev/module/modApplet.mjs"
 			}
 		},
 		{
@@ -92,7 +92,7 @@
 			"fields": {
 				"type": "application/javascript",
 				"module-type": "library",
-				"title": "$:/plugins/bj/tiddlywiki-preact/dev/module/newApplet.mjs"
+				"title": "$:/plugins/bj/unchane/dev/module/newApplet.mjs"
 			}
 		},
 		{
@@ -100,7 +100,7 @@
 			"fields": {
 				"type": "application/javascript",
 				"module-type": "library",
-				"title": "$:/plugins/bj/tiddlywiki-preact/dev/module/updateApplet.mjs"
+				"title": "$:/plugins/bj/unchane/dev/module/updateApplet.mjs"
 			}
 		},
 		{
@@ -108,7 +108,7 @@
 			"fields": {
 				"type": "application/javascript",
 				"module-type": "library",
-				"title": "$:/plugins/bj/tiddlywiki-preact/dev/updateApplet.mjs"
+				"title": "$:/plugins/bj/unchane/dev/updateApplet.mjs"
 			}
 		},
 		{
@@ -116,7 +116,7 @@
 			"fields": {
 				"type": "application/javascript",
 				"module-type": "library",
-				"title": "$:/plugins/bj/tiddlywiki-preact/dev/newInApplet.mjs"
+				"title": "$:/plugins/bj/unchane/dev/newInApplet.mjs"
 			}
 		},
 		{
@@ -124,7 +124,7 @@
 			"fields": {
 				"type": "application/javascript",
 				"module-type": "library",
-				"title": "$:/plugins/bj/tiddlywiki-preact/dev/module/newInApplet.mjs"
+				"title": "$:/plugins/bj/unchane/dev/module/newInApplet.mjs"
 			}
 		}
 	]

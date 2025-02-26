@@ -3,14 +3,14 @@
 \end
 
 \define newcomp()
-<$macrocall $name=mkpluginmacro title={{{[<qualify '$:/temp/select-applet'>get[text]]}}} rename={{{[<qualify '$:/temp/select-new-comp'>get[text]]}}} adds="$:/plugins/bj/tiddlywiki-preact/dev/blankcomp"/>
+<$macrocall $name=mkpluginmacro title={{{[<qualify '$:/temp/select-applet'>get[text]]}}} rename={{{[<qualify '$:/temp/select-new-comp'>get[text]]}}} adds="$:/plugins/bj/unchane/dev/blankcomp"/>
 \end
 
 
 \define new()
 <$action-createtiddler $basetitle={{{[<qualify '$:/temp/select-applet-name'>get[text]addprefix[$:/plugin/]]}}} text='{"tiddlers":{}}' type="application/json" plugin-type="plugin" tags="preact-applet" >
 
-<$macrocall $name=addtopluginmacro title=<<createTiddler-title>> rename={{{[<qualify '$:/temp/select-applet-name'>get[text]addsuffix[.mjs]]}}} source="[[$:/plugins/bj/tiddlywiki-preact/dev/blankstart.mjs]]" />
+<$macrocall $name=addtopluginmacro title=<<createTiddler-title>> rename={{{[<qualify '$:/temp/select-applet-name'>get[text]addsuffix[.mjs]]}}} source="[[$:/plugins/bj/unchane/dev/blankstart.mjs]]" />
 
 </$action-createtiddler>
 \end

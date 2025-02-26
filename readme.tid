@@ -1,4 +1,4 @@
-Preact modules are actioned by the pwidget. The parameters of the pwidget will be explained by using an [[example|$:/plugins/bj/tiddlywiki-preact/ASimpleExample]]:
+Preact modules are actioned by the pwidget. The parameters of the pwidget will be explained by using an [[example|$:/plugins/bj/unchane/ASimpleExample]]:
 
 ```
 <$pwidget $app="simple.mjs" $tids=`[[comment|commentTid]] [[#pcounter1|cntTid1]] [[#pcounter2|cntTid2]] ` title={{titleTid}}  errorMessage="Error in app"/>

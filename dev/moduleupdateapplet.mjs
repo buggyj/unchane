@@ -1,9 +1,9 @@
 
-const {html,useState} = await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs")
+const {html,useState} = await import ("$:/plugins/bj/unchane/preactsignal.mjs")
 
-const{modApplet} = await import ("$:/plugins/bj/tiddlywiki-preact/dev/module/modApplet.mjs")
+const{modApplet} = await import ("$:/plugins/bj/unchane/dev/module/modApplet.mjs")
 
-const {setTextReference} = await import ('$:/plugins/bj/tiddlywiki-preact/store.js')
+const {setTextReference} = await import ('$:/plugins/bj/unchane/store.js')
  
 const handleButtonClick = (title,adds,dels,comment) => {
 	if(modApplet(title,adds,dels,comment)) setTextReference("$:/status/RequireReloadDueToPluginChange","yes")

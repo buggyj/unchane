@@ -1,6 +1,6 @@
 
 /*\
-title: $:/bj/modules/tiddlywiki-preact/pwidget.js
+title: $:/bj/modules/unchane/pwidget.js
 type: application/javascript
 module-type: widget
 
@@ -13,8 +13,8 @@ module-type: widget
     var loadModuleP = null;
     var modname = "pwidget";
     var Widget = require("$:/core/modules/widgets/widget.js").widget;
-    const {setTxtRef,getTxtRef,typeChars} =  require("$:/plugins/bj/tiddlywiki-preact/store.js");
-    let bjModuleLoader = require("$:/plugins/bj/tiddlywiki-preact/mimport.js").bjModuleLoader;
+    const {setTxtRef,getTxtRef,typeChars} =  require("$:/plugins/bj/unchane/store.js");
+    let bjModuleLoader = require("$:/plugins/bj/unchane/mimport.js").bjModuleLoader;
     var preactWidget = function(parseTreeNode,options) {
         this.initialise(parseTreeNode,options);
     };
@@ -24,7 +24,7 @@ module-type: widget
     */
     preactWidget.prototype = new Widget();    
     
-    preactWidget.prototype.libpath = "$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs";
+    preactWidget.prototype.libpath = "$:/plugins/bj/unchane/preactsignal.mjs";
     
     preactWidget.prototype.setTypedTxtRef= function(key){
         return setTxtRef(this.typ[key],this.toTiddlers[key],this.state[key].value);     

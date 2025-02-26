@@ -7,7 +7,7 @@ select applet <$select tiddler=<<qualify '$:/temp/select-applet'>> default='' st
 </$list>
 </$select>
 
-<$pwidget $app="$:/plugins/bj/tiddlywiki-preact/dev/updateApplet.mjs"  title={{{[<qualify '$:/temp/select-applet'>get[text]]}}}/>
+<$pwidget $app="$:/plugins/bj/unchane/dev/updateApplet.mjs"  title={{{[<qualify '$:/temp/select-applet'>get[text]]}}}/>
 
 ---
-<$pwidget $app="$:/plugins/bj/tiddlywiki-preact/dev/newInApplet.mjs"  title={{{[<qualify '$:/temp/select-applet'>get[text]]}}}/>
+<$pwidget $app="$:/plugins/bj/unchane/dev/newInApplet.mjs"  title={{{[<qualify '$:/temp/select-applet'>get[text]]}}}/>

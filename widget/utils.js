@@ -1,11 +1,11 @@
 /*\
-title: $:/plugins/bj/tiddlywiki-preact/utils.mjs
+title: $:/plugins/bj/unchane/utils.mjs
 type: application/javascript
 module-type: library
 \*/
-const {generateNewTitle, getCreationFields, getModificationFields, getTiddler, addTiddler, Tiddler} = await import ("$:/plugins/bj/tiddlywiki-preact/storeutils.js")
+const {generateNewTitle, getCreationFields, getModificationFields, getTiddler, addTiddler, Tiddler} = await import ("$:/plugins/bj/unchane/storeutils.js")
 
-const {getTextReference} =  await import("$:/plugins/bj/tiddlywiki-preact/store.js");
+const {getTextReference} =  await import("$:/plugins/bj/unchane/store.js");
 
 // modified from tiddlywiki's $:/core/modules/widgets/action-createtiddler.js
 export function newTiddler({basetitle,timestamp="yes",override="no",template,fields}){
