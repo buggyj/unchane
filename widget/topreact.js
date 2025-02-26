@@ -29,8 +29,8 @@ module-type: widget
     preactWidget.prototype.setTypedTxtRef= function(key){
         return setTxtRef(this.typ[key],this.toTiddlers[key],this.state[key].value);     
     }
-    preactWidget.prototype.getTypedTxtRef = function(tid){     
-        return getTxtRef(this.typ[this.fromTiddlers[tid]],tid);
+    preactWidget.prototype.getTypedTxtRef = function(tid,deflt){     
+        return getTxtRef(this.typ[this.fromTiddlers[tid]],tid,deflt);
     }
 
     
@@ -52,7 +52,7 @@ module-type: widget
         }
         else this.domNode = document.querySelector(this.selector);
 		if (error) {
-			this.makeChildWidgets(this.getErrorMessage());
+			this.makeChildWidgets(this.getErrorMessage('missing app module'));
 			this.renderChildren(this.domNode,null);
 			return;
 		}
@@ -75,14 +75,15 @@ module-type: widget
 						stateX = this.fromTiddlers[tid]
 						keyX =  this.typ[stateX] + stateX
 						index = psignalsX.indexOf(keyX);
-						if (index === -1) {console.log(`miss ${keyX}`);throw ("param error")}
+						if (index === -1) {console.log(`unexpected ${keyX}`);throw (`Param error: unexpected ${keyX}`)}
 						psignalsX.splice(index, 1);
 					}
-		            valin = self.getTypedTxtRef(tid);    
+		            valin = self.getTypedTxtRef(tid,null);  
+		            if (valin === null) {console.log(`missing tid ${tid}`);throw (`Param error: missing tid ${tid}`)}  
 		            this.valin[this.fromTiddlers[tid]] = valin;    
 		            this.state[this.fromTiddlers[tid]] = signal(valin);  
 	            });
-				if (psignals && psignalsX.length !==0) {console.log(`extra param`);throw ("param error")}
+				if (psignals && psignalsX.length !==0) {console.log(`missing param`);throw ("missing param")}
 	            Object.keys(this.state).forEach(key => {
 	                effect(function () {        
 	                    //watch for udates from preact
@@ -95,7 +96,7 @@ module-type: widget
 	            });
        		}catch (e){
 				console.log(e)
-				this.makeChildWidgets(this.getErrorMessage());
+				this.makeChildWidgets(this.getErrorMessage(e));
 				this.renderChildren(this.domNode,null);
 				return;	
 			}     
@@ -103,7 +104,7 @@ module-type: widget
             //console.log(`Cache size: ${bjModuleLoader.numModules()}`);
             } catch (error) {
                 console.error('Error in main execution:', error);
-				this.makeChildWidgets(this.getErrorMessage());
+				this.makeChildWidgets(this.getErrorMessage('Error in main execution'));
 				this.renderChildren(this.domNode,null);
 				return;	
             } finally {
@@ -147,12 +148,13 @@ module-type: widget
     }
 
 
-	preactWidget.prototype.getErrorMessage = function() {
+	preactWidget.prototype.getErrorMessage = function(e) {
 		var parser,
 			errorMessage = this.getAttribute("errorMessage","");
 
-		if (errorMessage === "") {console.log("error without a name")
-			return [];
+		if (errorMessage === "" ) {
+			if (e) errorMessage = e
+			else return [];
 		}
 		parser = this.wiki.parseText("text/vnd.tiddlywiki",errorMessage,{parseAsInline: true});
 		if(parser) {
@@ -207,6 +209,14 @@ module-type: widget
     preactWidget.prototype.updatedTids = function( changedTiddlers) {
         const arr1=this.tiddlers||[];
         const updates = arr1.filter(item => changedTiddlers[item.split("!!")[0]]);
+        for (const val of updates) {
+         //is the source of a signal is deleted refresh the widget, and deal with error there  
+			if (changedTiddlers[val.split("!!")[0]]["deleted"]){
+				this.refreshSelf();
+			return 1;	
+			}
+		}
+        
 		try {
         this.updateSignals(updates);
         return updates.length;

@@ -5,34 +5,37 @@ module-type: library
 \*/
 
 
-function twGetTextReference(ref){
+function twGetTextReference(ref, def){
 
     const	retval=$tw.wiki.getTextReference.call($tw.wiki,ref);
-        if (typeof retval === 'undefined') throw new Error("tried to read missing textref")
+        if (typeof retval === 'undefined') {
+            if (def === undefined ) throw new Error("tried to read missing textref")
+            return def
+        }
     //console.log('::',retval)
         return retval; 
     }
     
     
-    const getTextReference = function(ref){var val= twGetTextReference(ref);return val};
+    const getTextReference = function(ref,def){var val= twGetTextReference(ref,def);return val};
     const setTextReference = function(ref,val){return $tw.wiki.setTextReference.call($tw.wiki,ref,val)};
 
-    const getBoolTxtRef = function(ref){
-        var retval = twGetTextReference(ref);
+    const getBoolTxtRef = function(ref,def){
+        var retval = twGetTextReference(ref,def);
 		if ((retval==="true") || (retval==="false"))
 			return (retval ==='true');
 		throw new Error("Not bool")
     };
     const setBoolTxtRef = function(ref,val){return $tw.wiki.setTextReference.call($tw.wiki,ref,val.toString())};
 
-    const getNumTxtRef = function(ref){
-        var retval = twGetTextReference(ref)*1;
+    const getNumTxtRef = function(ref,def){
+        var retval = twGetTextReference(ref,def)*1;
     if (isNaN(retval)) throw new Error("read NaN")
     return retval
     };
     const setNumTxtRef = function(ref,val){return $tw.wiki.setTextReference.call($tw.wiki,ref,val.toString())};
     
-    const getJsonTxtRef = function(ref){return (JSON.parse(twGetTextReference(ref)))};
+    const getJsonTxtRef = function(ref,def){return (JSON.parse(twGetTextReference(ref,def)))};
     const setJsonTxtRef = function(ref,val){return $tw.wiki.setTextReference.call($tw.wiki,ref,JSON.stringify(val))};
     
     const setTxtRef= function(typ, tid, val){
@@ -47,16 +50,16 @@ function twGetTextReference(ref){
         }
     }
     
-    const getTxtRef = function(typ, tid){ 
+    const getTxtRef = function(typ, tid, def){ 
         var x;
         if (typ ==='?') {
-           x= getBoolTxtRef(tid);
+           x= getBoolTxtRef(tid, def);
        } else if (typ ==='#') {
-           x= getNumTxtRef(tid);
+           x= getNumTxtRef(tid, def);
        } else if (typ ===':') {
-           x= getJsonTxtRef(tid);
+           x= getJsonTxtRef(tid, def);
        } else {
-           x = getTextReference(tid);
+           x = getTextReference(tid, def);
        }
        return x;
     }

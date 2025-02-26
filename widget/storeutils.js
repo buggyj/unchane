@@ -4,20 +4,14 @@ type: application/javascript
 module-type: library
 \*/
 
-/*
-exports. =function (ref){
-    const	retval=.call($tw.wiki,ref);
-        if (typeof retval === 'undefined') throw new Error("tried to read missing val")
-    //console.log('::',retval)
-    return retval; 
-}
-*/
-exports.generateNewTitle = $tw.wiki.generateNewTitle.bind($tw.wiki);
+exports.generateNewTitle = $tw.wiki.generateNewTitle.bind($tw.wiki);exports.stringifyList = $tw.utils.stringifyList.bind($tw.wiki);
+exports.parseStringArray = $tw.utils.parseStringArray.bind($tw.wiki);
 exports.Tiddler = $tw.Tiddler;
 exports.tiddlerExists = $tw.wiki.tiddlerExists.bind($tw.wiki);
 exports.deleteTiddler = $tw.wiki.deleteTiddler.bind($tw.wiki);
 exports.getCreationFields = $tw.wiki.getCreationFields.bind($tw.wiki);
 exports.getModificationFields = $tw.wiki.getModificationFields.bind($tw.wiki);
+exports.getTiddlerData = $tw.wiki.getTiddlerData.bind($tw.wiki);
 exports.getTiddler =function (title){
     const	retval=$tw.wiki.getTiddler.call($tw.wiki,title);
         //if (typeof retval === 'undefined') throw new Error("undefined from getTiddler")
