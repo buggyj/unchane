@@ -10,7 +10,8 @@ module-type: widget
     /*jslint node: true, browser: true */
     /*global $tw: false */
     "use strict";
-    var loadModuleP = null;
+    var loadModuleP = null
+    const {getModuleP,setModuleP} = require("$:/plugins/bj/unchane/modulep.js");
     var modname = "pwidget";
     var Widget = require("$:/core/modules/widgets/widget.js").widget;
     const {setTxtRef,getTxtRef,typeChars} =  require("$:/plugins/bj/unchane/store.js");
@@ -62,7 +63,11 @@ module-type: widget
             try {
             const {start, psignals} = await bjModuleLoader.loadModule(this.app);
 			//psignals are used to check that the correct 2waybinding (params) are given before the component is mounted
-			if (!loadModuleP) loadModuleP = await bjModuleLoader.loadModule (`${this.libpath}`);
+			loadModuleP = getModuleP()//null if hot reload
+			if (!loadModuleP) {
+				loadModuleP = await bjModuleLoader.loadModule (`${this.libpath}`);
+				setModuleP(loadModuleP)
+			}
             const {html, render, signal, effect} = loadModuleP 
 	        var psignalsX,stateX,keyX,index,valin 
 			//psignals is optional - only check params when it exists
@@ -239,9 +244,13 @@ module-type: widget
 		//don't wait for preact to destroy app
 		var domNode =this.domNode
 		this.removeLocalDomNodes()
+		loadModuleP = getModuleP()//null if hot reload
 		;(async () => {
 			try {
-				if (!loadModuleP) loadModuleP = await bjModuleLoader.loadModule (`${this.libpath}`);
+				if (!loadModuleP) {
+					loadModuleP = await bjModuleLoader.loadModule (`${this.libpath}`);
+					setModuleP(loadModuleP)
+				}
 				const {render} =  loadModuleP;
 				// preact are 'leaf' nodes and so don't have children, so no need to call destroy on children
 				render(null, domNode);

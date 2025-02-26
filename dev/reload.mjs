@@ -4,6 +4,8 @@ const {init} = await import ("$:/plugins/bj/unchane/towidget.mjs")
 
 const bjModuleLoader = await import ("$:/plugins/bj/unchane/mimport.js");
 
+const {setModuleP} = await import ("$:/plugins/bj/unchane/modulep.js");
+
 export function start({__pwidget}) {
 	const {dispatchEvent, invokeActionString} = init(__pwidget)//methods bound to widget instance 
 
@@ -11,6 +13,7 @@ export function start({__pwidget}) {
 	
 	function doReset() {
 		bjModuleLoader.bjModuleLoader.reset() 
+		setModuleP(null) 
 		//touch the reset macro to make widget tree re-render
 		invokeActionString(resetWidgetTree())	
 	}	
