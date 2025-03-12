@@ -35,7 +35,13 @@ function twGetTextReference(ref, def){
     };
     const setNumTxtRef = function(ref,val){return $tw.wiki.setTextReference.call($tw.wiki,ref,val.toString())};
     
-    const getJsonTxtRef = function(ref,def){return (JSON.parse(twGetTextReference(ref,def)))};
+     const getJsonTxtRef = function(ref,def){
+    	var deft = def,ret;
+		try {
+			ret = JSON.parse(twGetTextReference(ref,def))
+			} catch(e) {ret = deft}
+			return ret
+		};
     const setJsonTxtRef = function(ref,val){return $tw.wiki.setTextReference.call($tw.wiki,ref,JSON.stringify(val))};
     
     const setTxtRef= function(typ, tid, val){

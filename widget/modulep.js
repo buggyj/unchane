@@ -3,7 +3,7 @@ title: $:/plugins/bj/unchane/modulep.js
 type: application/javascript
 module-type: library
 
-facilitate hot reload
+facilitate hot reload, set to null for recompile 
 \*/
 
 const createModuleLoader=require("$:/plugins/bj/unchane/moduleloader.js").createModuleLoader;
