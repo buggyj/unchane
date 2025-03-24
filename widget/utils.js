@@ -37,7 +37,11 @@ export function newTiddler({basetitle,timestamp="yes",override="no",template,fie
 	addTiddler(new Tiddler(templateTiddler.fields,creationFields,fields,modificationFields,{title: title}));
 	return title
 	}
-	
+		
+export function createtiddler({$basetitle,$template,$override="no",$timestamp="yes", ...attributes}) {
+	return newTiddler({basetitle:$basetitle,template:$template,override:$override,timestamp:$timestamp, fields:attributes}); 
+}
+
 //deletes if value is null (or undefined)
 export function setfield({$tiddler,$field,$index,$value,$timestamp="yes", ...attributes}) {
 	var actionTimestamp = ($timestamp === "yes"),
@@ -55,6 +59,7 @@ export function setfield({$tiddler,$field,$index,$value,$timestamp="yes", ...att
 	}
 	return true; // Action was invoked
 };
+
 
 export function deletetiddler({$filter,$tiddler}) {
 	var tiddlers = [];
