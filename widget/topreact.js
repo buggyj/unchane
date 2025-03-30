@@ -101,6 +101,7 @@ module-type: widget
 	            });
        		}catch (e){
 				console.log(e)
+                this.loaded = null; //error state
 				this.makeChildWidgets(this.getErrorMessage(e));
 				this.renderChildren(this.domNode,null);
 				return;	
@@ -109,6 +110,7 @@ module-type: widget
             //console.log(`Cache size: ${bjModuleLoader.numModules()}`);
             } catch (error) {
                 console.error('Error in main execution:', error);
+                this.loaded = null; //error state
 				this.makeChildWidgets(this.getErrorMessage('Error in main execution'));
 				this.renderChildren(this.domNode,null);
 				return;	
@@ -199,7 +201,7 @@ module-type: widget
     */
     preactWidget.prototype.refresh = function(changedTiddlers) {
         var changedAttributes = this.computeAttributes();
-	if (!this.loaded){ console.log ("refesh called early") ;return;}
+	if (this.loaded === false){ console.log ("refesh called early") ;return;}
         // Completely rerender if any of our attributes have changed
         if($tw.utils.count(changedAttributes) > 0) {
             // Rerender ourselves
@@ -223,6 +225,11 @@ module-type: widget
 		}
         
 		try {
+	    if (this.loaded === null && updates.length>0) {
+		//in error state with some updates
+			this.refreshSelf();
+			return 1;
+		}
         this.updateSignals(updates);
         return updates.length;
 		}catch (e){console.log(e)
@@ -233,7 +240,11 @@ module-type: widget
     preactWidget.prototype.updateSignals= function(updates){
         self=this;
         updates.forEach(tid => {
-            var valin = self.getTypedTxtRef(tid);    
+            var valin = self.getTypedTxtRef(tid,null);    
+            if (valin === null) { //something is wrong, re-render and handle error there
+                this.refreshSelf();
+                return;
+            };    
             this.valin[this.fromTiddlers[tid]] = valin;    
             self.state[this.fromTiddlers[tid]].value = valin;
 
