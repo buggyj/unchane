@@ -3,8 +3,9 @@ title: $:/plugins/bj/unchane/storeutils.js
 type: application/javascript
 module-type: library
 \*/
-
-exports.generateNewTitle = $tw.wiki.generateNewTitle.bind($tw.wiki);exports.stringifyList = $tw.utils.stringifyList.bind($tw.wiki);
+exports.tiddlerExists = $tw.wiki.tiddlerExists.bind($tw.wiki);
+exports.generateNewTitle = $tw.wiki.generateNewTitle.bind($tw.wiki);
+exports.stringifyList = $tw.utils.stringifyList.bind($tw.wiki);
 exports.parseStringArray = $tw.utils.parseStringArray.bind($tw.wiki);
 exports.Tiddler = $tw.Tiddler;
 exports.tiddlerExists = $tw.wiki.tiddlerExists.bind($tw.wiki);

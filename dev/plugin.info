@@ -3,7 +3,7 @@
     "name":"unchane-dev",
 	"description": "interface to preact with signals and htm",
 	"author": "Jeffrey Wilkinson (BJ)",
-	"version": "0.0.24",
+	"version": "0.0.27",
 	"plugin-priority":4,
 	"list": "make",
 	"core-version": ">=5.3.0",

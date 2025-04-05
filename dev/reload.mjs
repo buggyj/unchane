@@ -7,7 +7,7 @@ const bjModuleLoader = await import ("$:/plugins/bj/unchane/mimport.js");
 const {setModuleP} = await import ("$:/plugins/bj/unchane/modulep.js");
 
 export function start({__pwidget}) {
-	const {dispatchEvent, invokeActionString} = init(__pwidget)//methods bound to widget instance 
+	const {invokeActionString} = init(__pwidget)//methods bound to widget instance 
 
 	function resetWidgetTree() {return `<$action-setfield $tiddler="$:/temp/bj/unchane/dev/resetTid" update="update"/>`}
 	

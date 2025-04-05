@@ -34,6 +34,19 @@ module-type: widget
         return getTxtRef(this.typ[this.fromTiddlers[tid]],tid,deflt);
     }
 
+    function normalizePsignals(psigs) {
+		const newpsig = psigs.map(psig =>{
+			if (typeof psig === "string") return psig; 
+			let typePrefix = ":"
+			const [key, value] = Object.entries(psig)[0]; 
+			if (value === "boolean") typePrefix ="?"
+			if (value === "number") typePrefix ="#"
+			if (value === "string") typePrefix =""
+			return `${typePrefix}${key}` 
+		})
+		return newpsig;
+	}
+    
     
     /*
     Render this widget into the DOM
@@ -61,7 +74,9 @@ module-type: widget
 		//this.loaded is used in the updates() to check that component is load before it updates
         ;(async () => {
             try {
-            const {start, psignals} = await bjModuleLoader.loadModule(this.app);
+            let {start, psignals} = await bjModuleLoader.loadModule(this.app);
+            //Normalize, some psignals need to be converted to original form of
+            if (psignals) psignals = normalizePsignals(psignals)
 			//psignals are used to check that the correct 2waybinding (params) are given before the component is mounted
 			loadModuleP = getModuleP()//null if hot reload
 			if (!loadModuleP) {
@@ -153,7 +168,13 @@ module-type: widget
           });
           this.tiddlers =tds;
     }
-
+    
+	 function stringToArray(inputString) {
+	  if (!inputString) return [];
+	  const items = inputString.match(/\[\[.*?\]\]|\[.*?\]/g);
+	  if (!items) return []; 
+	  return items.map(item => item.replace(/[\[\]]/g, ''));
+	}
 
 	preactWidget.prototype.getErrorMessage = function(e) {
 		var parser,
@@ -184,7 +205,7 @@ module-type: widget
         this.selector = this.getAttribute("$selector");
         this.tids = this.getAttribute("$tids","");
         this["class"] = this.getAttribute("class","");
-        this.tiddlers=$tw.utils.parseStringArray(this.tids)||[];
+        this.tiddlers=stringToArray(this.tids);
         this.makeTidMaps();
         this.params = [];
         $tw.utils.each(this.attributes,function(attribute,name) {
