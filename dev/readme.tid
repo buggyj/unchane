@@ -1,0 +1,8 @@
+There is a 'hot reload' button the builts mjs files to make development more pleasant, this can be seen in the dev sidebar tab .
+
+```
+<$pwidget $app="$:/plugins/bj/unchane/dev/reload.mjs">
+```
+
+
+There are other tools to develop plugins that is also in the dev sidebar tab.

@@ -27,7 +27,14 @@
 				"update": "update",
 				"title": "$:/temp/bj/unchane/dev/resetTid"
 			}
-		},		{
+		},	
+		{
+			"file": "readme.tid",
+			"fields": {
+				"title": "$:/plugins/bj/unchane/dev/readme"
+			}
+		},
+		{
 			"file": "sidebar.tid",
 			"fields": {
 				"tags": "$:/tags/SideBar",
