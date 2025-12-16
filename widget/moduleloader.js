@@ -65,6 +65,8 @@ const createModuleLoader = (getModule, basic) => {
 				const module = moduleCache.get(id);
 				if (module) return module;
 				console.log("failed at import ",id,e);
+				delete globalThis[`__privateLoadModule${name}`];
+				pending[id] = null
 				throw e;
 			}
         
