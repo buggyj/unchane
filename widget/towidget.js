@@ -48,7 +48,21 @@ export const init = (pwidget) => {
 			paramObject[$name] = $value;
 		}
 		// Dispatch the message
-		var params = {
+		
+		var params;
+		if ($message == "tm-navigate"){
+			params = {
+				type: $message,
+				tiddlerTitle: pwidget.getVariable("currentTiddler"),
+				navigateFromTitle: pwidget.getVariable("storyTiddler")
+			   };
+			   for (const key in attributes) {
+				if (attributes.hasOwnProperty(key) && key.charAt(0) !== "$") { 
+					params[key] = attributes[key];
+				}
+		   }
+		}
+		else params = {
 			type: $message,
 			param: param,
 			paramObject: paramObject,
@@ -59,15 +73,6 @@ export const init = (pwidget) => {
 		pwidget.dispatchEvent(params);
 		return true; // Action was invoked
 	};    
-		
-    
-    
-    
-    
-    
-    
-    
-    
     
     return {
         getVariable,
